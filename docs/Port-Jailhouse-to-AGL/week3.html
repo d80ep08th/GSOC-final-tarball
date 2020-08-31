@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset=“UTF-8”>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Port Jailhouse to agl </title>
+
+
+<link rel="stylesheet" href="reset.css" type="text/css" />
+<link rel="stylesheet" href="styles.css" type="text/css" />
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+<!-- google fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/slider.js"></script>
+<script type="text/javascript" src="js/superfish.js"></script>
+
+<script type="text/javascript" src="/js/custom.js"></script>
+
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+
+<!--
+deiform, a free CSS web template by ZyPOP (zypopwebtemplates.com/)
+
+Download: http://zypopwebtemplates.com/
+
+License: Creative Commons Attribution
+//-->
+
+<style media="screen">
+body {
+  background-image: url('starry.jpg');
+
+}
+</style>
+</head>
+
+
+
+<body>
+<div id="container" class="width">
+
+    <header>
+
+
+
+	<div class="width" id="Project">
+
+    		<h1><a href="https://github.com/d80ep08th/Port-Jailhouse-to-AGL">Port Jailhouse to AGL</a></h1>
+
+</div>
+
+<div class="clear" id="weeks">
+</br>
+<nav>
+
+      <ul class="sf-menu dropdown">
+
+
+          <li><a href="index.html">Home</a>
+          </li>
+
+
+
+          <li><a href="week1.html">Week1</a>
+
+                  <ul>
+
+                    <li><a href="#">Build an image for raspberry pi4 containing the jailhouse hypervisor to experiment with</a></li>
+                  </ul>
+          </li>
+
+          <li><a href="week2.html">Week2</a>
+
+                  <ul>
+                      <li><a href="#">Initialize jailhouse hypervisor on the raspi4 with the image built from jailhouse-images repo</a></li>
+                      <li><a href="#">Run an inmate in a jailhouse cell</a></li>
+                      <li><a href="#">Research the yocto project for building images for AGL.</a></li>
+                  </ul>
+          </li>
+
+          <li class="selected"><a href="week3.html">Week3</a>
+
+                  <ul>
+                    <li><a href="#">Build minimal agl images  from yocto with jailhouse</a></li>
+                    <li><a href="#">Build a jailhouse package based on a git repository commit</a></li>
+
+                  </ul>
+
+          </li>
+
+          <li><a href="week4.html">Week4</a>
+            <ul>
+              <li><a href="#">Connect a raspberry pi 4 to a CAN bus module(controller-MCP2515 & transceiver-TJA1050)</a></li>
+
+            </ul>
+          </li>
+           
+           <li><a href="week5.html">Week5</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week6.html">Week6</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week7.html">Week7</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week8.html">Week8</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week9.html">Week9</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week10.html">Week10</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week11.html">Week11</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week12.html">Week12</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          
+
+
+
+        </ul>
+</nav>
+</div>
+
+
+</header>
+
+
+
+
+    <div id="body" class="width">
+
+
+
+    <section id="content" class="two-column with-right-sidebar">
+
+      <article>
+
+
+	          		 <h2>Week3</h2>
+			           <div class="article-info">Posted on <time datetime="2020-06-19">19 June</time> </div>
+                  <p>
+
+                    Procedure:-</br>
+                        Clone the latest yocto dunfell branch ( git clone -b dunfell git://git.yoctoproject.org/poky.git )</br>
+                        Clone the agl repo from master branch ( repo init -u https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo  )</br>
+                        Clone this meta layer I created for jailhouse recipe (git clone https://github.com/d80ep08th/meta-yocto-jailhouse-rpi4.git )</br>
+                        Setup the build directory ( source meta-agl/scripts/aglsetup.sh -m raspberrpi4 -b build-jailhouse agl-devel )</br>
+                        Add the meta layer to the bblayers.conf file.</br>
+                        Build the jailhouse package  (bitbake jailhouse)</br>
+                        Add the  jailhouse to  the local.conf file.</br>
+                        Build a minimal agl image ( bitbake agl-image-minimal)</br>
+                    Research:-</br>
+                        A preferred method for adding recipes to the build environment is to place them within a new layer</br>
+                        Layers isolate particular sets of build meta-data based on machine, functionality or similar, and help to keep the environment clean.</br>
+                        We add the layer to the bitbake configuration in conf/bblayers.conf</br>
+                        We add the file --> recipe-kernel/jailhouse/jailhouse.bb to build a package in the meta layer with a git repository commit</br>
+                        The main points to note of this jailhouse.bb file : -</br>
+                            SRC_URI is set to point to the git repository</br>
+                            SRC_REV corresponds to a particular commit into that repository (it is also possible to specify a branch)</br>
+                            There is a LICENSE variable defined to indicate the type of license to the build environment (MIT) and another variable,</br>
+                            LIC_FILES_CHKSUM, points to a file within the source tree that will be retrieved, with a corresponding md5 check-sum to ensure</br>
+                            that somebody has actually verified the source license file corresponds to that given to the build environment. Also that this file,</br>
+                             and thus potentially the license, has not changed over time.</br>
+                            The source directory for the recipe build, ${S} is set to "${WORKDIR}/git" which is the default location to which the retrieved git </br>
+                            repository will be checked out and unpacked.</br>
+
+
+
+
+                  </p>
+		    </article>
+
+    </section>
+
+
+
+<!--        <aside class="sidebar big-sidebar right-sidebar">
+
+
+</aside>  -->
+      <div class="clear"></div>
+      </div>
+    </div>
+
+    <footer>
+
+    </footer>
+
+
+</body>
+
+
+
+
+
+
+
+</html>

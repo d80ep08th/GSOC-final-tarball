@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset=“UTF-8”>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Port Jailhouse to agl </title>
+
+
+<link rel="stylesheet" href="reset.css" type="text/css" />
+<link rel="stylesheet" href="styles.css" type="text/css" />
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- google fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/slider.js"></script>
+<script type="text/javascript" src="js/superfish.js"></script>
+
+<script type="text/javascript" src="/js/custom.js"></script>
+
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+
+<!--
+deiform, a free CSS web template by ZyPOP (zypopwebtemplates.com/)
+
+Download: http://zypopwebtemplates.com/
+
+License: Creative Commons Attribution
+//-->
+
+<style media="screen">
+body {
+  background-image: url('starry.jpg') ;
+
+}
+
+</style>
+
+</head>
+
+
+
+<body>
+<div id="container" class="width">
+
+    <header>
+
+
+
+	<div class="width" id="Project">
+
+    		<h1><a href="https://github.com/d80ep08th/Port-Jailhouse-to-AGL">Port Jailhouse to AGL</a></h1>
+
+</div>
+
+<div class="clear" id="weeks">
+</br>
+<nav>
+
+      <ul class="sf-menu dropdown">
+
+
+          <li><a href="index.html">Home</a>
+          </li>
+
+
+
+          <li  class="selected"><a href="week1.html">Week1</a>
+
+                  <ul>
+                    <li><a href="three-column.html">Build an image for raspberry pi4 containing the jailhouse hypervisor to experiment with</a></li>
+
+                  </ul>
+          </li>
+
+          <li><a href="week2.html">Week2</a>
+
+                  <ul>
+                      <li><a href="#">Initialize jailhouse hypervisor on the raspi4 with the image built from jailhouse-images repo</a></li>
+                      <li><a href="#">Run an inmate in a jailhouse cell</a></li>
+                      <li><a href="#">Research the yocto project for building images for AGL.</a></li>
+                  </ul>
+          </li>
+
+          <li><a href="week3.html">Week3</a>
+            <ul>
+              <li><a href="#">Build minimal agl images  from yocto with jailhouse</a></li>
+              <li><a href="#">Build a jailhouse package based on a git repository commit</a></li>
+
+            </ul>
+          </li>
+
+          <li><a href="week4.html">Week4</a>
+            <ul>
+              <li><a href="#">Connect a raspberry pi 4 to a CAN bus module(controller-MCP2515 & transceiver-TJA1050)</a></li>
+
+            </ul>
+          </li>
+            <li><a href="week5.html">Week5</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week6.html">Week6</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week7.html">Week7</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week8.html">Week8</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week9.html">Week9</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week10.html">Week10</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week11.html">Week11</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week12.html">Week12</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          
+
+
+
+        </ul>
+
+
+  <div class="clear"></div>
+</nav>
+</div>
+</header>
+
+
+
+    <div id="body" class="width">
+
+
+
+		    <section id="content" class="two-column with-right-sidebar">
+
+	         <article>
+
+
+			<h2>Week1</h2>
+			<div class="article-info">Posted on <time datetime="2020-06-5">5 June</time></div>
+
+
+
+
+      <div id="coder">
+
+Clone the Jailhouse-images repository which contains the script that will build you the image for your device - <br/>
+
+<div>$ git clone https://github.com/siemens/jailhouse-images.git </div><br/>
+<br/>
+Permit the build-images.sh file to be executed <br/>
+
+<div>$ chmod +x build-images.sh</div><br/>
+<br/>
+Call the script   <br/>
+
+<div>$ ./build-images.sh<br/>
+<br/>
+Available images demo images:<br/>
+ 1: QEMU/KVM Intel-x86 virtual target<br/>
+ 2: QEMU ARM64 virtual target<br/>
+ 3: Orange Pi Zero (256 MB edition)<br/>
+ 4: Intel NUC (NUC6CAY, 8 GB RAM)<br/>
+ 5: Marvell ESPRESSObin (1 GB edition)<br/>
+ 6: Marvell MACCHIATObin<br/>
+ 7: LeMaker HiKey (Kirin 620 SoC, 2 GB edition)<br/>
+ 8: Avnet Ultra96<br/>
+ 9: Raspberry Pi 4 (1 GB edition)<br/>
+ 10: Pine64+ (Allwinner A64, 2GB edition)<br/>
+ 0: all (may take hours...)<br/>
+<br/>
+Select images to build (space-separated index list):</div>
+<br/>
+<br/>
+You’ll get the above output to which you will have to input the no. next to the device for which you want to build the image ( which in this case is  9 ) - This will start the build process.<br/>
+<br/>
+-------------<br/>
+Error Maybe !<br/>
+-------------<br/>
+
+If you are running this script as root , then you may face error at some point during the build process .<br/>
+Reason being , <br/>
+If the kas build container is started as root, the host-tar configure step in buildroot will bail out. Beside accidental manual invocation as root, some CI setup may generate such a scenario. Avoid that failure by setting the env variable that the configure step suggests.<br/>
+<br/>
+Change directory to  /recipes-core/non-root-initramfs/files/debian<br/>
+In debian folder there is a file named -  rules<br/>
+Add the following to the rules file : -<br/>
+<br/>
+export FORCE_UNSAFE_CONFIGURE=1<br/>
+ override_dh_auto_configure:<br/>
+        cp ../.config .<br/>
+        ${MAKE} olddefconfig<br/>
+<br/>
+<br/>
+Your image should build smoothly but give it like a half an hr to be done.<br/>
+You will get the image file here -> build/tmp/deploy/images/rpi4/demo-image-jailhouse-demo-rpi4.wic.img<br/>
+<br/>
+<br/>
+ Flash this image on an empty sd card  to make a bootable sd-card so you can load it<br/>
+<br/>
+<br/>
+You need to find the location and name of the microsd card as read by your computer. To list info of all block devices run this -<br/>
+$  lsblk<br/>
+<br/>
+Your usb will be listed under sdb<br/>
+For example -<br/>
+sdb      8:16   1  14.9G  0 disk<br/>
+├─sdb1   8:17   1  60.9M  0 part /media/root/boot<br/>
+└─sdb2   8:18   1   5.7G  0 part /media/root/root<br/>
+<br/>
+Unmount the blocks under sdb<br/>
+		$ sudo umount dev/sdb/<?><br/>
+<br/>
+<br/>
+Use dd to flash the img to sd card<br/>
+$ dd if=<location of image> of=<usb location> bs=4M  status=progress && sync<br/>
+<br/>
+where ,<br/>
+ if =  build/tmp/deploy/images/rpi4/demo-image-jailhouse-demo-rpi4.wic.img<br/>
+and,<br/>
+of = dev/sdb<br/>
+<br/>
+Insert the bootable microsd card in your raspi4 and power it up.<br/>
+The display will open up a console on which you can now run jailhouse.<br/>
+
+
+
+
+
+
+
+</div>
+
+
+		    </article>
+
+
+      </section>
+
+<!--        <aside class="sidebar big-sidebar right-sidebar">
+
+
+</aside>  -->
+      <div class="clear"></div>
+
+      </div>
+
+</div>
+
+    <footer>
+
+    </footer>
+</body>
+
+
+
+
+
+
+
+</html>

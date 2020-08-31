@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset=“UTF-8”>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Port Jailhouse to agl </title>
+
+
+<link rel="stylesheet" href="reset.css" type="text/css" />
+<link rel="stylesheet" href="styles.css" type="text/css" />
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- google fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/slider.js"></script>
+<script type="text/javascript" src="js/superfish.js"></script>
+
+<script type="text/javascript" src="/js/custom.js"></script>
+
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+
+<!--
+deiform, a free CSS web template by ZyPOP (zypopwebtemplates.com/)
+
+Download: http://zypopwebtemplates.com/
+
+License: Creative Commons Attribution
+//-->
+
+<style media="screen">
+body {
+  background-image: url('starry.jpg');
+
+}
+
+
+</style>
+</head>
+
+
+
+<body>
+<div id="container" class="width">
+
+    <header>
+
+
+
+	<div class="width" id="Project">
+
+    		<h1><a href="https://github.com/d80ep08th/Port-Jailhouse-to-AGL">Port Jailhouse to AGL</a></h1>
+
+</div>
+
+<div class="clear" id="weeks">
+</br>
+<nav>
+
+      <ul class="sf-menu dropdown">
+
+
+          <li><a href="index.html">Home</a>
+          </li>
+
+
+
+          <li><a href="week1.html">Week1</a>
+
+                  <ul>
+
+                    <li><a href="#">Build an image for raspberry pi4 containing the jailhouse hypervisor to experiment with</a></li>
+                  </ul>
+          </li>
+
+          <li><a href="week2.html">Week2</a>
+
+                  <ul>
+                      <li><a href="#">Initialize jailhouse hypervisor on the raspi4 with the image built from jailhouse-images repo</a></li>
+                      <li><a href="#">Run an inmate in a jailhouse cell</a></li>
+                      <li><a href="#">Research the yocto project for building images for AGL.</a></li>
+                  </ul>
+          </li>
+
+          <li><a href="week3.html">Week3</a>
+            <ul>
+              <li><a href="#">Build minimal agl images  from yocto with jailhouse</a></li>
+              <li><a href="#">Build a jailhouse package based on a git repository commit</a></li>
+
+            </ul>
+          </li>
+
+          <li class="selected"><a href="week4.html">Week4</a>
+            <ul>
+              <li><a href="#">Connect a raspberry pi 4 to a CAN bus module(controller-MCP2515 & transceiver-TJA1050)</a></li>
+
+            </ul>
+          </li>
+           <li><a href="week5.html">Week5</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week6.html">Week6</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week7.html">Week7</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week8.html">Week8</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week9.html">Week9</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week10.html">Week10</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week11.html">Week11</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week12.html">Week12</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          
+
+
+
+        </ul>
+
+
+  <div class="clear"></div>
+</nav>
+</div>
+</header>
+
+
+    <div id="body" class="width">
+
+
+
+		    <section id="content" class="two-column with-right-sidebar">
+
+	         <article>
+
+<h2> Week 4</h2></br>
+			<h2>
+
+    Connect a raspberrypi4 </br>to a CAN bus module </br>(controller-MCP2515 & transceiver-TJA1050)
+</h2>
+			<div class="article-info">Posted on <time datetime="2020-06-26">26 June</time></div>
+
+                  <p>
+
+                    Procedure:-</br>
+</br>
+                        Boot the raspberry-pi4 with the latest raspbian buster image.</br>
+                        Edit the /boot/config.txt file ( dtoverlay=mcp2515-can0,oscillator=8000000,interrupt=25 )</br>
+                        Install can-utils (sudo apt-get install can-utils)</br>
+                        Reboot the os.</br>
+                        Prepare the can bus module to connect with the rpi4.( https://www.beyondlogic.org/wp-content/uploads/2019/12/Raspberry-PI-MCP2515-Pinout.jpg )</br>
+                        Manually bring up the can interface (  sudo /sbin/ip link set can0 up type can bitrate 500000 )</br>
+                        Use ifconfig to check that the can interface is up.</br>
+</br>
+                    Research:-</br>
+</br>
+                        The CAN bus (Controller Area Network) was originally designed by Robert Bosch for the automotive market to connect ECUs (Engine/Electronic Control Units) together. The protocol was officially released in 1986. The first CAN controller chips were introduced by Intel in 1987, and shortly thereafter by Philips.</br>
+                        Raspberry Pi doesn't have a built-in CAN Bus but its GPIO includes SPI Bus, that is supported by large number of CAN controllers.</br>
+                        The Linux kernel will not automatically discover the CAN Controller on the SPI interface. To load the appropriate driver, you must specify device tree overlay settings at boot by editing the /boot/config.txt file.</br>
+                        CAN-utils is a collection of extremely useful debugging tools using the SocketCAN interface. It includes applications such as: candump , canplayer , cansend, cangen, canbusload</br>
+                        CAN Bus is a multi-master protocol, each node needs a controller to manage its data. CAN controller is connected to the CAN bus using CAN-H and CAN-L.</br>
+                        CAN Controller needs a send/receive chip i.e. a CAN Transceiver to adapt signa    ls to CAN Bus levels.</br>
+                        The voltage range of MCP-2515 is 2.7V to 5.5V but for TJA-1050 it is 4.7V to 5.25V. The signals will not have the same level if we connect them directly. In my case I cut a trace on the PCB and soldered a pin onto the trace to deliver 5V only to the TJA1050.</br>
+
+Detailed steps and research will be published here :  https://d80ep08th.github.io/Port-Jailhouse-to-AGL/</br>
+
+
+                  </p>
+
+
+
+
+
+
+		    </article>
+
+
+      </section>
+
+<!--        <aside class="sidebar big-sidebar right-sidebar">
+
+
+</aside>  -->
+      <div class="clear"></div>
+      </div>
+    </div>
+
+    <footer>
+
+    </footer>
+
+
+</body>
+
+
+
+
+
+
+
+</html>

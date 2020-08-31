@@ -1,0 +1,630 @@
+From 5b675411be0efc4d5c940550be007bbc0c1f2602 Mon Sep 17 00:00:00 2001
+From: Parth Dode <dodecoder@gmail.com>
+Date: Fri, 28 Aug 2020 20:10:18 +0200
+Subject: [PATCH] meta-agl-jailhouse: Added inmates for jailhouse w.r.t. the
+ root cell qemu-agl
+
+    updated jailhouse_git.bb accordingly
+
+    Bug-AGL: SPEC-3507
+
+Change-Id: I0548d9bbec02d8506205b0dccb4ef591b290bca6
+
+Change-Id: I6d065032ef7fff40535929219ce067aab260f043
+Signed-off-by: Parth Dode <dodecoder@gmail.com>
+---
+ .../jailhouse/files/agl-apic-demo.c           |  78 ++++++
+ .../jailhouse/files/agl-ivshmem-demo.c        | 119 +++++++++
+ .../jailhouse/files/agl-linux-x86-demo.c      | 246 ++++++++++++++++++
+ .../jailhouse/files/agl-pci-demo.c            | 103 ++++++++
+ .../jailhouse/jailhouse_git.bb                |  13 +-
+ 5 files changed, 558 insertions(+), 1 deletion(-)
+ create mode 100644 meta-agl-jailhouse/recipes-extended/jailhouse/files/agl-apic-demo.c
+ create mode 100644 meta-agl-jailhouse/recipes-extended/jailhouse/files/agl-ivshmem-demo.c
+ create mode 100644 meta-agl-jailhouse/recipes-extended/jailhouse/files/agl-linux-x86-demo.c
+ create mode 100644 meta-agl-jailhouse/recipes-extended/jailhouse/files/agl-pci-demo.c
+
+diff --git a/meta-agl-jailhouse/recipes-extended/jailhouse/files/agl-apic-demo.c b/meta-agl-jailhouse/recipes-extended/jailhouse/files/agl-apic-demo.c
+new file mode 100644
+index 0000000..f49cd3a
+--- /dev/null
++++ b/meta-agl-jailhouse/recipes-extended/jailhouse/files/agl-apic-demo.c
+@@ -0,0 +1,78 @@
++/*
++ * Jailhouse, a Linux-based partitioning hypervisor
++ *
++ * Minimal configuration for demo inmates, 1 CPU, 1 MB RAM, 1 serial port
++ *
++ * Copyright (c) Siemens AG, 2013
++ *
++ * Authors:
++ *  Jan Kiszka <jan.kiszka@siemens.com>
++ *
++ * This work is licensed under the terms of the GNU GPL, version 2.  See
++ * the COPYING file in the top-level directory.
++ */
++
++#include <jailhouse/types.h>
++#include <jailhouse/cell-config.h>
++
++struct {
++	struct jailhouse_cell_desc cell;
++	__u64 cpus[1];
++	struct jailhouse_memory mem_regions[2];
++	struct jailhouse_cache cache_regions[1];
++	struct jailhouse_pio pio_regions[1];//[2]->[1]  stop @0x3f8
++} __attribute__((packed)) config = {
++	.cell = {
++		.signature = JAILHOUSE_CELL_DESC_SIGNATURE,
++		.revision = JAILHOUSE_CONFIG_REVISION,
++		.name = "agl-apic-demo",
++		.flags = JAILHOUSE_CELL_VIRTUAL_CONSOLE_PERMITTED,
++
++		.cpu_set_size = sizeof(config.cpus),
++		.num_memory_regions = ARRAY_SIZE(config.mem_regions),
++		.num_cache_regions = ARRAY_SIZE(config.cache_regions),
++		.num_irqchips = 0,
++		.num_pio_regions = ARRAY_SIZE(config.pio_regions),
++		.num_pci_devices = 0,
++
++		.console = {
++			.type = JAILHOUSE_CON_TYPE_8250,
++			.flags = JAILHOUSE_CON_ACCESS_PIO,
++			.address = 0x2f8,    /* ######## ttyS0 is host -> ttyS1 */
++		},
++	},
++
++	.cpus = {
++		0x8,
++	},
++
++	.mem_regions = {
++		/* RAM */ { /* JH_memory: 0x22600000-0x271fffff */
++			.phys_start = 0x26e00000 ,   /* agl-linux-x86: 0x22600000-0x26e00000 */
++			.virt_start = 0,             /* agl-ivshmem: 0x26e00000- (end of ivshmem cell) */
++			.size = 0x00100000,
++			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
++				JAILHOUSE_MEM_EXECUTE | JAILHOUSE_MEM_LOADABLE,
++		},
++		/* communication region */ {
++			.virt_start = 0x00100000,
++			.size = 0x00001000,
++			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
++				JAILHOUSE_MEM_COMM_REGION,
++		},
++	},
++
++	.cache_regions = {
++		{
++			.start = 0,
++			.size = 2,
++			.type = JAILHOUSE_CACHE_L3,
++		},
++	},
++
++	.pio_regions = {
++		PIO_RANGE(0x2f8, 8), /* serial 2 */
++//		PIO_RANGE(0x3f8, 8), /* serial 1 */
++		PIO_RANGE(0xe010, 8), /* OXPCIe952 serial */
++	},
++};
+diff --git a/meta-agl-jailhouse/recipes-extended/jailhouse/files/agl-ivshmem-demo.c b/meta-agl-jailhouse/recipes-extended/jailhouse/files/agl-ivshmem-demo.c
+new file mode 100644
+index 0000000..79feb6c
+--- /dev/null
++++ b/meta-agl-jailhouse/recipes-extended/jailhouse/files/agl-ivshmem-demo.c
+@@ -0,0 +1,119 @@
++/*
++ * Jailhouse, a Linux-based partitioning hypervisor
++ *
++ * Minimal configuration for ivshmem inmate demo:
++ * 1 CPU, 1MB RAM, serial ports, 4K shmem
++ *
++ * Copyright (c) Siemens AG, 2013, 2014
++ *
++ * Authors:
++ *  Henning Schild <henning.schild@siemens.com>
++ *
++ * This work is licensed under the terms of the GNU GPL, version 2.  See
++ * the COPYING file in the top-level directory.
++ */
++
++#include <jailhouse/types.h>
++#include <jailhouse/cell-config.h>
++
++struct {
++	struct jailhouse_cell_desc cell;
++	__u64 cpus[1];
++	struct jailhouse_memory mem_regions[7];
++	struct jailhouse_pio pio_regions[1];
++	struct jailhouse_pci_device pci_devices[1];
++	struct jailhouse_pci_capability pci_caps[0];
++} __attribute__((packed)) config = {
++	.cell = {
++		.signature = JAILHOUSE_CELL_DESC_SIGNATURE,
++		.revision = JAILHOUSE_CONFIG_REVISION,
++		.name = "ivshmem-demo",
++		.flags = JAILHOUSE_CELL_PASSIVE_COMMREG |
++			JAILHOUSE_CELL_VIRTUAL_CONSOLE_PERMITTED,
++
++		.cpu_set_size = sizeof(config.cpus),
++		.num_memory_regions = ARRAY_SIZE(config.mem_regions),
++		.num_irqchips = 0,
++		.num_pio_regions = ARRAY_SIZE(config.pio_regions),
++		.num_pci_devices = ARRAY_SIZE(config.pci_devices),
++		.num_pci_caps = ARRAY_SIZE(config.pci_caps),
++
++		.console = {
++			.type = JAILHOUSE_CON_TYPE_8250,
++			.flags = JAILHOUSE_CON_ACCESS_PIO,
++			.address = 0x2f8,/* ######## ttyS0 is host -> ttyS1 */
++		},
++	},
++
++	.cpus = {
++		0b0010,
++	},
++
++	.mem_regions = {
++		/* IVSHMEM shared memory regions (demo) */
++		{
++			.phys_start = 0x271f0000,
++			.virt_start = 0x271f0000,
++			.size = 0x1000,
++			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_ROOTSHARED,
++		},
++		{
++			.phys_start = 0x271f1000,
++			.virt_start = 0x271f1000,
++			.size = 0x9000,
++			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
++				JAILHOUSE_MEM_ROOTSHARED,
++		},
++		{
++			.phys_start = 0x271fa000,
++			.virt_start = 0x271fa000,
++			.size = 0x2000,
++			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_ROOTSHARED,
++		},
++		{
++			.phys_start = 0x271fc000,
++			.virt_start = 0x271fc000,
++			.size = 0x2000,
++			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
++				JAILHOUSE_MEM_ROOTSHARED,
++		},
++		{
++			.phys_start = 0x271fe000,
++			.virt_start = 0x271fe000,
++			.size = 0x2000,
++			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_ROOTSHARED,
++		},
++		/* RAM */ {
++			.phys_start = 0x27200000,/* to 0x27300000 */
++			.virt_start = 0,
++			.size = 0x00100000,
++			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
++				JAILHOUSE_MEM_EXECUTE | JAILHOUSE_MEM_LOADABLE,
++		},
++		/* communication region */ {
++			.virt_start = 0x00100000,
++			.size = 0x00001000,
++			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
++				JAILHOUSE_MEM_COMM_REGION,
++		},
++	},
++
++	.pio_regions = {
++		PIO_RANGE(0x2f8, 8), /* serial 2 */
++//		PIO_RANGE(0x3f8, 8), /* serial 1 */
++	},
++
++	.pci_devices = {
++		{
++			.type = JAILHOUSE_PCI_TYPE_IVSHMEM,
++			.domain = 0x0000,
++			.bdf = 0x0e << 3,
++			.bar_mask = JAILHOUSE_IVSHMEM_BAR_MASK_MSIX,
++			.num_msix_vectors = 16,
++			.shmem_regions_start = 0,
++			.shmem_dev_id = 1,
++			.shmem_peers = 3,
++			.shmem_protocol = JAILHOUSE_SHMEM_PROTO_UNDEFINED,
++		},
++	},
++};
+diff --git a/meta-agl-jailhouse/recipes-extended/jailhouse/files/agl-linux-x86-demo.c b/meta-agl-jailhouse/recipes-extended/jailhouse/files/agl-linux-x86-demo.c
+new file mode 100644
+index 0000000..06085df
+--- /dev/null
++++ b/meta-agl-jailhouse/recipes-extended/jailhouse/files/agl-linux-x86-demo.c
+@@ -0,0 +1,246 @@
++/*
++ * Jailhouse, a Linux-based partitioning hypervisor
++ *
++ * Configuration for Linux inmate, 1 CPU, 74 MB RAM, ~1MB shmem, serial ports
++ *
++ * Copyright (c) Siemens AG, 2013-2015
++ *
++ * Authors:
++ *  Jan Kiszka <jan.kiszka@siemens.com>
++ *
++ * This work is licensed under the terms of the GNU GPL, version 2.  See
++ * the COPYING file in the top-level directory.
++ */
++
++#include <jailhouse/types.h>
++#include <jailhouse/cell-config.h>
++
++struct {
++	struct jailhouse_cell_desc cell;
++	__u64 cpus[1];
++	struct jailhouse_memory mem_regions[20];
++	struct jailhouse_cache cache_regions[1];
++	struct jailhouse_irqchip irqchips[1];
++	struct jailhouse_pio pio_regions[1];
++	struct jailhouse_pci_device pci_devices[4];
++	struct jailhouse_pci_capability pci_caps[6];
++} __attribute__((packed)) config = {
++	.cell = {
++		.signature = JAILHOUSE_CELL_DESC_SIGNATURE,
++		.revision = JAILHOUSE_CONFIG_REVISION,
++		.name = "linux-x86-demo",
++		.flags = JAILHOUSE_CELL_PASSIVE_COMMREG |
++			 JAILHOUSE_CELL_VIRTUAL_CONSOLE_PERMITTED,
++
++		.cpu_set_size = sizeof(config.cpus),
++		.num_memory_regions = ARRAY_SIZE(config.mem_regions),
++		.num_cache_regions = ARRAY_SIZE(config.cache_regions),
++		.num_irqchips = ARRAY_SIZE(config.irqchips),
++		.num_pio_regions = ARRAY_SIZE(config.pio_regions),
++		.num_pci_devices = ARRAY_SIZE(config.pci_devices),
++		.num_pci_caps = ARRAY_SIZE(config.pci_caps),
++	},
++
++	.cpus = {
++		0b1100,
++	},
++
++	.mem_regions = {
++		/* IVSHMEM shared memory region (virtio-blk front) */
++		{
++			.phys_start = 0x27000000, /* to 0x27001000 */
++			.virt_start = 0x27000000,
++			.size = 0x1000,
++			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_ROOTSHARED,
++		},
++		{
++			.phys_start = 0x27001000,/* to 0x270e0000 */
++			.virt_start = 0x27001000,
++			.size = 0xdf000,
++			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
++				JAILHOUSE_MEM_ROOTSHARED,
++		},
++		{ 0 },
++		{ 0 },
++		/* IVSHMEM shared memory region (virtio-con front) */
++		{
++			.phys_start = 0x270e0000,/* to 0x270e1000 */
++			.virt_start = 0x270e0000,
++			.size = 0x1000,
++			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_ROOTSHARED,
++		},
++		{
++			.phys_start = 0x270e1000,/*to 0x270f0000 */
++			.virt_start = 0x270e1000,
++			.size = 0xf000,
++			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
++				JAILHOUSE_MEM_ROOTSHARED,
++		},
++		{ 0 },
++		{ 0 },
++		/* IVSHMEM shared memory regions (demo) */
++		{
++			.phys_start = 0x270f0000,/*to 0x270f1000 */
++			.virt_start = 0x270f0000,
++			.size = 0x1000,
++			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_ROOTSHARED,
++		},
++		{
++			.phys_start = 0x270f1000,/*to 0x270fa000 */
++			.virt_start = 0x270f1000,
++			.size = 0x9000,
++			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
++				JAILHOUSE_MEM_ROOTSHARED,
++		},
++		{
++			.phys_start = 0x270fa000,/* to 0x270fc000 */
++			.virt_start = 0x270fa000,
++			.size = 0x2000,
++			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_ROOTSHARED,
++		},
++		{
++			.phys_start = 0x270fc000,/* to 0x270fe000*/
++			.virt_start = 0x270fc000,
++			.size = 0x2000,
++			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_ROOTSHARED,
++		},
++		{
++			.phys_start = 0x270fe000,/* to 0x27100000 */
++			.virt_start = 0x270fe000,
++			.size = 0x2000,
++			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
++				JAILHOUSE_MEM_ROOTSHARED,
++		},
++		/* IVSHMEM shared memory regions (networking) */
++		JAILHOUSE_SHMEM_NET_REGIONS(0x27100000, 1),
++		/* low RAM */ {
++			.phys_start = 0x22600000,/* to 0x22700000*/
++			.virt_start = 0,
++			.size = 0x00100000,
++			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
++				JAILHOUSE_MEM_EXECUTE | JAILHOUSE_MEM_DMA |
++				JAILHOUSE_MEM_LOADABLE,
++		},
++		/* communication region */ {
++			/*.phys_start = ? */
++			.virt_start = 0x00100000,
++			.size = 0x00001000,
++			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
++				JAILHOUSE_MEM_COMM_REGION,
++		},
++		/* high RAM */ {
++			.phys_start = 0x22700000,/*to 0x26e00000 */
++			.virt_start = 0x00200000,
++			.size = 0x4700000,
++			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
++				JAILHOUSE_MEM_EXECUTE | JAILHOUSE_MEM_DMA |
++				JAILHOUSE_MEM_LOADABLE,
++		},
++	},
++
++	.cache_regions = {
++		{
++			.start = 0,
++			.size = 2,
++			.type = JAILHOUSE_CACHE_L3,
++		},
++	},
++
++	.irqchips = {
++		/* IOAPIC */ {
++			.address = 0xfec00000,
++			.id = 0xff00,
++			.pin_bitmap = {
++				(1 << 3) | (1 << 4),
++			},
++		},
++	},
++
++	.pio_regions = {
++		PIO_RANGE(0x2f8, 8), /* serial 2 */
++//		PIO_RANGE(0x3f8, 8), /* serial 1 */
++		PIO_RANGE(0xe010, 8), /* OXPCIe952 serial1 */
++	},
++
++	.pci_devices = {
++		{
++			.type = JAILHOUSE_PCI_TYPE_IVSHMEM,
++			.domain = 0x0,
++			.bdf = 0x0c << 3,
++			.bar_mask = JAILHOUSE_IVSHMEM_BAR_MASK_MSIX,
++			.num_msix_vectors = 2,
++			.shmem_regions_start = 0,
++			.shmem_dev_id = 1,
++			.shmem_peers = 2,
++			.shmem_protocol = JAILHOUSE_SHMEM_PROTO_VIRTIO_FRONT +
++				VIRTIO_DEV_BLOCK,
++		},
++		{
++			.type = JAILHOUSE_PCI_TYPE_IVSHMEM,
++			.domain = 0x0,
++			.bdf = 0x0d << 3,
++			.bar_mask = JAILHOUSE_IVSHMEM_BAR_MASK_MSIX,
++			.num_msix_vectors = 3,
++			.shmem_regions_start = 4,
++			.shmem_dev_id = 1,
++			.shmem_peers = 2,
++			.shmem_protocol = JAILHOUSE_SHMEM_PROTO_VIRTIO_FRONT +
++				VIRTIO_DEV_CONSOLE,
++		},
++		{
++			.type = JAILHOUSE_PCI_TYPE_IVSHMEM,
++			.domain = 0x0,
++			.bdf = 0x0e << 3,
++			.bar_mask = JAILHOUSE_IVSHMEM_BAR_MASK_MSIX,
++			.num_msix_vectors = 16,
++			.shmem_regions_start = 8,
++			.shmem_dev_id = 2,
++			.shmem_peers = 3,
++			.shmem_protocol = JAILHOUSE_SHMEM_PROTO_UNDEFINED,
++		},
++		{
++			.type = JAILHOUSE_PCI_TYPE_IVSHMEM,
++			.domain = 0x0,
++			.bdf = 0x0f << 3,
++			.bar_mask = JAILHOUSE_IVSHMEM_BAR_MASK_MSIX,
++			.num_msix_vectors = 2,
++			.shmem_regions_start = 13,
++			.shmem_dev_id = 1,
++			.shmem_peers = 2,
++			.shmem_protocol = JAILHOUSE_SHMEM_PROTO_VETH,
++		},
++	},
++
++	.pci_caps = {
++		{
++			.id = PCI_CAP_ID_MSI,
++			.start = 0xd0,
++			.len = 14,
++			.flags = JAILHOUSE_PCICAPS_WRITE,
++		},
++		{
++			.id = PCI_CAP_ID_EXP,
++			.start = 0xe0,
++			.len = 20,
++			.flags = JAILHOUSE_PCICAPS_WRITE,
++		},
++		{
++			.id = PCI_CAP_ID_MSIX,
++			.start = 0xa0,
++			.len = 12,
++			.flags = JAILHOUSE_PCICAPS_WRITE,
++		},
++		{
++			.id = PCI_EXT_CAP_ID_ERR | JAILHOUSE_PCI_EXT_CAP,
++			.start = 0x100,
++			.len = 4,
++			.flags = 0,
++		},
++		{
++			.id = PCI_EXT_CAP_ID_DSN | JAILHOUSE_PCI_EXT_CAP,
++			.start = 0x140,
++			.len = 4,
++			.flags = 0,
++		},
++	}
++};
+diff --git a/meta-agl-jailhouse/recipes-extended/jailhouse/files/agl-pci-demo.c b/meta-agl-jailhouse/recipes-extended/jailhouse/files/agl-pci-demo.c
+new file mode 100644
+index 0000000..59d4232
+--- /dev/null
++++ b/meta-agl-jailhouse/recipes-extended/jailhouse/files/agl-pci-demo.c
+@@ -0,0 +1,103 @@
++/*
++ * Jailhouse, a Linux-based partitioning hypervisor
++ *
++ * Minimal configuration for PCI demo inmate:
++ * 1 CPU, 1 MB RAM, serial ports, 1 Intel HDA PCI device
++ *
++ * Copyright (c) Siemens AG, 2014
++ *
++ * Authors:
++ *  Jan Kiszka <jan.kiszka@siemens.com>
++ *
++ * This work is licensed under the terms of the GNU GPL, version 2.  See
++ * the COPYING file in the top-level directory.
++ */
++
++#include <jailhouse/types.h>
++#include <jailhouse/cell-config.h>
++
++struct {
++	struct jailhouse_cell_desc cell;
++	__u64 cpus[1];
++	struct jailhouse_memory mem_regions[3];
++	struct jailhouse_pio pio_regions[1];        /* ttyS0 is host -> ttyS1 */
++	struct jailhouse_pci_device pci_devices[1];
++	struct jailhouse_pci_capability pci_caps[1];
++} __attribute__((packed)) config = {
++	.cell = {
++		.signature = JAILHOUSE_CELL_DESC_SIGNATURE,
++		.revision = JAILHOUSE_CONFIG_REVISION,
++		.name = "agl-pci-demo",
++		.flags = JAILHOUSE_CELL_PASSIVE_COMMREG |
++			JAILHOUSE_CELL_VIRTUAL_CONSOLE_PERMITTED,
++
++		.cpu_set_size = sizeof(config.cpus),
++		.num_memory_regions = ARRAY_SIZE(config.mem_regions),
++		.num_irqchips = 0,
++		.num_pio_regions = ARRAY_SIZE(config.pio_regions),
++		.num_pci_devices = ARRAY_SIZE(config.pci_devices),
++		.num_pci_caps = ARRAY_SIZE(config.pci_caps),
++
++
++		.console = {
++			.type = JAILHOUSE_CON_TYPE_8250,
++			.flags = JAILHOUSE_CON_ACCESS_PIO,
++			.address = 0x2f8,
++		},
++	},
++
++	.cpus = {
++		0x4,
++	},
++
++	.mem_regions = {
++		/* RAM */ {
++			.phys_start = 0x26f00000,/*to 0x27000000| apic-demo @0x26e00000-@0x26f00000 */
++			.virt_start = 0,
++			.size = 0x00100000,
++			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
++				JAILHOUSE_MEM_EXECUTE | JAILHOUSE_MEM_LOADABLE,
++		},
++		/* communication region */ {
++			.virt_start = 0x00100000,
++			.size = 0x00001000,
++			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE |
++				JAILHOUSE_MEM_COMM_REGION,
++		},
++		/* HDA BAR0 */ {
++			.phys_start = 0xfebd4000,
++			.virt_start = 0xfebd4000,
++			.size = 0x00004000,
++			.flags = JAILHOUSE_MEM_READ | JAILHOUSE_MEM_WRITE,
++		},
++	},
++
++
++	.pio_regions = {
++		PIO_RANGE(0x2f8, 8), /* serial 2 */
++		//PIO_RANGE(0x3f8, 8), /* serial 1 */
++		PIO_RANGE(0xe010, 8), /* OXPCIe952 serial2 */
++	},
++
++
++	.pci_devices = {
++		{ /* Intel HDA @00:1b.0 */
++			.type = JAILHOUSE_PCI_TYPE_DEVICE,
++			.domain = 0x0000,
++			.bdf = 0x00d8,
++			.caps_start = 0,
++			.num_caps = 1,
++			.num_msi_vectors = 1,
++			.msi_64bits = 1,
++		},
++	},
++
++	.pci_caps = {
++		{ /* Intel HDA @00:1b.0 */
++			.id = PCI_CAP_ID_MSI,
++			.start = 0x60,
++			.len = 14,
++			.flags = JAILHOUSE_PCICAPS_WRITE,
++		},
++	},
++};
+diff --git a/meta-agl-jailhouse/recipes-extended/jailhouse/jailhouse_git.bb b/meta-agl-jailhouse/recipes-extended/jailhouse/jailhouse_git.bb
+index cb7e48c..462f0a7 100644
+--- a/meta-agl-jailhouse/recipes-extended/jailhouse/jailhouse_git.bb
++++ b/meta-agl-jailhouse/recipes-extended/jailhouse/jailhouse_git.bb
+@@ -19,6 +19,13 @@ SRC_URI = "git://github.com/siemens/jailhouse \
+            file://0001-configs-arm64-Add-support-for-RPi4-with-more-than-1G.patch \
+            "
+ 
++SRC_URI += "file://qemu-agl.c \
++	    file://agl-apic-demo.c \
++	    file://agl-pci-demo.c \
++	    file://agl-ivshmem-demo.c \
++	    file://agl-linux-x86-demo.c \
++	    "
++
+ DEPENDS = "virtual/kernel dtc-native python3-mako-native make-native"
+ 
+ require jailhouse-arch.inc
+@@ -41,7 +48,11 @@ do_configure() {
+ 		
+ 	# copy ${WORKDIR}/qemu-agl.c ${S}/configs/x86/ <--- folder where the cells are defined in the source tree to be compiled
+ 	cp ${WORKDIR}/qemu-agl.c ${S}/configs/${JH_ARCH}
+-	
++	cp ${WORKDIR}/agl-apic-demo.c ${S}/configs/x86/
++	cp ${WORKDIR}/agl-pci-demo.c ${S}/configs/x86/
++	cp ${WORKDIR}/agl-linux-x86-demo.c ${S}/configs/x86/
++	cp ${WORKDIR}/agl-ivshmem-demo.c ${S}/configs/x86/
++
+ 	sed -i '1s|^#!/usr/bin/env python$|#!/usr/bin/env python3|' ${B}/tools/${BPN}-*
+ }
+ 
+-- 
+2.28.0
+

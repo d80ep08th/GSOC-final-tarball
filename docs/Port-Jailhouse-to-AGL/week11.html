@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset=“UTF-8”>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Port Jailhouse to agl </title>
+
+
+<link rel="stylesheet" href="reset.css" type="text/css" />
+<link rel="stylesheet" href="styles.css" type="text/css" />
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- google fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/slider.js"></script>
+<script type="text/javascript" src="js/superfish.js"></script>
+
+<script type="text/javascript" src="/js/custom.js"></script>
+
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+
+<!--
+deiform, a free CSS web template by ZyPOP (zypopwebtemplates.com/)
+
+Download: http://zypopwebtemplates.com/
+
+License: Creative Commons Attribution
+//-->
+
+<style media="screen">
+body {
+  background-image: url('starry.jpg') ;
+
+}
+
+</style>
+
+</head>
+
+
+
+<body>
+<div id="container" class="width">
+
+    <header>
+
+
+
+    <div class="width" id="Project">
+
+        <h1><a href="https://github.com/d80ep08th/Port-Jailhouse-to-AGL">Port Jailhouse to AGL</a></h1>
+
+<!--
+    <nav>
+
+	<ul class="sf-menu dropdown">
+
+
+	    <li class="selected"><a href="index.html">Home</a></li>
+
+    	    <li>
+
+	    <a href="examples.html">Style examples</a>
+
+	    <ul>
+        	        <li><a href="three-column.html">Three Column</a></li>
+	    <li><a href="one-column.html">One Column</a></li>
+            	        <li><a href="#">Another link</a></li>
+        	    </ul>
+
+    	    </li>
+
+    	    <li><a href="#">Services</a></li>
+
+	<li>
+
+	    <a href="#">Products</a>
+
+	    <ul>
+        	        <li><a href="#">Product One</a></li>
+            	    <li><a href="#">Product Two</a></li>
+            	    <li><a href="#">Product Three</a></li>
+        	    </ul>
+
+    	    </li>
+
+	<li><a href="#">Contact</a></li>
+	    </ul>
+
+
+        <div class="clear"></div>
+        </nav>
+        -->
+</div>
+
+<div class="clear" id="weeks">
+</br>
+<nav>
+
+      <ul class="sf-menu dropdown">
+
+
+          <li><a href="index.html">Home</a>
+          </li>
+
+
+
+          <li><a href="week1.html">Week1</a>
+
+                  <ul>
+                    <li><a href="three-column.html">Build an image for raspberry pi4 containing the jailhouse hypervisor to experiment with</a></li>
+
+                  </ul>
+          </li>
+
+          <li><a href="week2.html">Week2</a>
+
+                  <ul>
+                      <li><a href="#">Initialize jailhouse hypervisor on the raspi4 with the image built from jailhouse-images repo</a></li>
+                      <li><a href="#">Run an inmate in a jailhouse cell</a></li>
+                      <li><a href="#">Research the yocto project for building images for AGL.</a></li>
+                  </ul>
+          </li>
+
+          <li><a href="week3.html">Week3</a>
+            <ul>
+              <li><a href="#">Build minimal agl images  from yocto with jailhouse</a></li>
+              <li><a href="#">Build a jailhouse package based on a git repository commit</a></li>
+
+            </ul>
+          </li>
+
+          <li><a href="week4.html">Week4</a>
+            <ul>
+              <li><a href="#">Connect a raspberry pi 4 to a CAN bus module(controller-MCP2515 & transceiver-TJA1050)</a></li>
+
+            </ul>
+          </li>
+          <li><a href="week5.html">Week5</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week6.html">Week6</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week7.html">Week7</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week8.html">Week8</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week9.html">Week9</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week10.html">Week10</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li class="selected"><a href="week11.html">Week11</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week12.html">Week12</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          
+
+        </ul>
+
+
+  <div class="clear"></div>
+</nav>
+</div>
+</header>
+
+
+<div id="body" class="width">
+
+
+
+<section id="content" class="two-column with-right-sidebar">
+
+     <article>
+
+
+        <h2>
+
+	Week11
+        </h2>
+	<!-- <div class="article-info">Posted on <time datetime="2020-06-26">26 June</time></div>
+	-->
+                  <p>
+</br>moved the config file to templates/feature/jailhouse/50_jailhouse.inc  
+</br> 
+</br>Why? well, it gets added in the local.conf of your build folder , its easier to then manipulate the file from there 
+</br>this is how it looks in the local.conf file
+</br>
+</br># # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #                                                                               
+</br># fragment {                                                                                                                                                  
+</br># /home/parth/AGL/meta-agl-devel/templates/feature/agl-jailhouse/50_local.conf.inc                                                                            
+</br>#                                                                                                                                                             
+</br>#### JAILHOUSE                                                                                                                                                
+</br>IMAGE_INSTALL_append = " jailhouse jailhouse-demos"                                                                                                           
+</br>PREFERRED_VERSION_linux-raspberrypi = "5.4%"                                                                                                                  
+</br>                                                                                                                                                              
+</br># qemu flags for jailhouse                                                                                                                                    
+</br>QB_OPT_APPEND_append = " -device intel-iommu,intremap=on,x-buggy-eim=on"                                                                                      
+</br>QB_MACHINE_qemux86-64 = "-machine q35,kernel_irqchip=split -smp 4"                                                                                            
+</br>QB_MEM_qemux86-64 = "-m 2048"                                                                                                                                 
+</br>                                                                                                                                                              
+</br>QB_CPU_qemux86-64 = "-enable-kvm"                                                                                                                             
+</br>QB_CPU_KVM_qemux86-64 = "-cpu host,-kvm-pv-eoi,-kvm-pv-ipi,-kvm-asyncpf,-kvm-steal-time,-kvmclock,-invpcid,-hypervisor"                                       
+</br>                                                                                                                                                              
+</br>QB_KERNEL_CMDLINE_APPEND_append = " intel_iommu=off memmap=82M\$0x3a000000 mem=1G"                                                                            
+</br>QB_KERNEL_ROOT = "/dev/sda"                                                                                                                                   
+</br>QB_SERIAL_OPT = "-serial vc -serial mon:stdio"      
+</br> 
+</br>learned to use mid-night commander (its so efficient , like wow, wish I started using this a couple of months ago,
+</br>I was using Vim but in vain!)
+</br> 
+</br>Currently , runqemu works enough to start the boot but ends with kernel panic 50_local.conf.inc still requires refactoring.  
+</br> 
+</br>My documentation game needs work , also thinking of changing the UI of my doc blog page to something more simple because 
+</br>I ended up reading a lot of guides in the last month about the ins and outs of the kernel and it kinda makes me wanna step down 
+</br>from the whole star wars flair I was trying and adhere to the kernel hacker demographic.
+</br> 
+    
+
+
+
+                  </p>
+
+
+
+
+
+
+    </article>
+
+
+</section>
+
+
+
+
+
+<!--
+</br>
+<aside class="sidebar big-sidebar right-sidebar">
+
+
+</aside>  -->
+
+      <div class="clear"></div>
+
+      </div>
+
+</div>
+
+    <footer>
+
+    </footer>
+</body>
+
+
+
+
+
+
+
+</html>

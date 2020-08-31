@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset=“UTF-8”>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Port Jailhouse to agl </title>
+
+
+<link rel="stylesheet" href="reset.css" type="text/css" />
+<link rel="stylesheet" href="styles.css" type="text/css" />
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- google fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/slider.js"></script>
+<script type="text/javascript" src="js/superfish.js"></script>
+
+<script type="text/javascript" src="/js/custom.js"></script>
+
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+
+<!--
+deiform, a free CSS web template by ZyPOP (zypopwebtemplates.com/)
+
+Download: http://zypopwebtemplates.com/
+
+License: Creative Commons Attribution
+//-->
+
+<style media="screen">
+body {
+  background-image: url('starry.jpg') ;
+
+}
+
+</style>
+
+</head>
+
+
+
+<body>
+<div id="container" class="width">
+
+    <header>
+
+
+
+    <div class="width" id="Project">
+
+        <h1><a href="https://github.com/d80ep08th/Port-Jailhouse-to-AGL">Port Jailhouse to AGL</a></h1>
+
+<!--
+    <nav>
+
+	<ul class="sf-menu dropdown">
+
+
+	    <li class="selected"><a href="index.html">Home</a></li>
+
+    	    <li>
+
+	    <a href="examples.html">Style examples</a>
+
+	    <ul>
+        	        <li><a href="three-column.html">Three Column</a></li>
+	    <li><a href="one-column.html">One Column</a></li>
+            	        <li><a href="#">Another link</a></li>
+        	    </ul>
+
+    	    </li>
+
+    	    <li><a href="#">Services</a></li>
+
+	<li>
+
+	    <a href="#">Products</a>
+
+	    <ul>
+        	        <li><a href="#">Product One</a></li>
+            	    <li><a href="#">Product Two</a></li>
+            	    <li><a href="#">Product Three</a></li>
+        	    </ul>
+
+    	    </li>
+
+	<li><a href="#">Contact</a></li>
+	    </ul>
+
+
+        <div class="clear"></div>
+        </nav>
+        -->
+</div>
+
+<div class="clear" id="weeks">
+</br>
+<nav>
+
+      <ul class="sf-menu dropdown">
+
+
+          <li><a href="index.html">Home</a>
+          </li>
+
+
+
+          <li><a href="week1.html">Week1</a>
+
+                  <ul>
+                    <li><a href="three-column.html">Build an image for raspberry pi4 containing the jailhouse hypervisor to experiment with</a></li>
+
+                  </ul>
+          </li>
+
+          <li><a href="week2.html">Week2</a>
+
+                  <ul>
+                      <li><a href="#">Initialize jailhouse hypervisor on the raspi4 with the image built from jailhouse-images repo</a></li>
+                      <li><a href="#">Run an inmate in a jailhouse cell</a></li>
+                      <li><a href="#">Research the yocto project for building images for AGL.</a></li>
+                  </ul>
+          </li>
+
+          <li><a href="week3.html">Week3</a>
+            <ul>
+              <li><a href="#">Build minimal agl images  from yocto with jailhouse</a></li>
+              <li><a href="#">Build a jailhouse package based on a git repository commit</a></li>
+
+            </ul>
+          </li>
+
+          <li><a href="week4.html">Week4</a>
+            <ul>
+              <li><a href="#">Connect a raspberry pi 4 to a CAN bus module(controller-MCP2515 & transceiver-TJA1050)</a></li>
+
+            </ul>
+          </li>
+          <li><a href="week5.html">Week5</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week6.html">Week6</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week7.html">Week7</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week8.html">Week8</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week9.html">Week9</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li class="selected"><a href="week10.html">Week10</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week11.html">Week11</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week12.html">Week12</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          
+
+        </ul>
+
+
+  <div class="clear"></div>
+</nav>
+</div>
+</header>
+
+
+
+<div id="body" class="width">
+
+
+
+<section id="content" class="two-column with-right-sidebar">
+
+     <article>
+
+
+        <h2>
+
+	Week10
+        </h2>
+	<!-- <div class="article-info">Posted on <time datetime="2020-06-26">26 June</time></div>
+	-->
+                  <p>
+</br>Opened a pull request
+</br>25096 : Added config file for qemu x86-84 to manipulate runqemu into passing jailhouse hardware check
+</br> 
+</br>added a /conf/machine/qemux86-64.conf file  
+</br>so this is how the configuration looks , this needs to be refactored further
+</br>QB_OPT_APPEND: “-vga vmware -show-cursor -usb -device usb-tablet -device virtio-rng-pci -vga virtio”
+</br>QB_DEFAULT_KERNEL: "./tmp/deploy/images/qemux86-64/bzImage"
+</br>QB_MACHINE: "-machine q35,kernel_irqchip=split"
+</br>QB_CPU: “ -cpu host,-kvm-pv-eoi,-kvm-pv-ipi,-kvm-asyncpf,-kvm-steal-time,-kvmclock,-invpcid,-hypervisor”
+</br>QB_KERNEL_CMDLINE_APPEND: "root=/dev/sda intel_iommu=off memmap=82M\$0x3a000000 mem=1G vga=0x305 console=ttyS0,115200n8"
+</br>QB_KERNEL_ROOT: /dev/sda
+</br>QB_NETWORK_DEVICE: "-device virtio-net-pci,netdev=net0,mac=@MAC@"
+</br>QB_TAP_OPT: "-netdev #tap,id=net0,ifname=@TAP@,script=no,downscript=no"
+</br>QB_SLIRP_OPT: " -netdev user,id=net"
+</br>QB_CMDLINE_IP_SLIRP: "ip=eth0:dhcp"
+</br>QB_CMDLINE_IP_TAP: "ip=192.168.7.@CLIENT@::192.168.7.@GATEWAY@:255.255.2#55.0::eth0"
+</br>QB_ROOTFS_OPT: "-drive file=./tmp/deploy/images/qemux86-64/agl-image-minimal-qemux86-64.ext4,discard=unmap,if=none,id=disk,format=raw"
+</br>QB_SERIAL_OPT: "-serial vc -serial mon:stdio"
+ 
+ 
+</br>#QB_SYSTEM_NAME: “qemu-system-x86_64”
+</br>#QB_DEFAULT_FSTYPE: ext4
+</br>#QB_MEM: -m 2048
+</br>#QB_CPU_KVM: “-cpu kvm64 -cpu qemu64,+ssse3,+sse4.1,+sse4.2,+popcnt”
+</br>#QB_DTB:#qemu dtb name
+</br>#QB_AUDIO_DRV: “ alsa ”
+</br>#QB_AUDIO_OPT: "-soundhw hda"
+</br>#QB_TCPSERIAL_OPT:
+</br>#QB_ROOTFS_EXTRA_OPT:
+
+
+</br>bitbake will show a parse error if you keep the declare a config as :
+</br>QB_SYSTEM_NAME: “qemu-system-x86_64”
+</br>it needs to be like this -
+</br>QB_SYSTEM_NAME = “qemu-system-x86_64”
+</br>
+</br>Simon says I cant sign off as d__ep__th , has to be my real name :(
+</br> 
+</br>Learned something cool, adding the "SPEC - 3507 " in your commit message  links it to that specific spec in jira
+</br> 
+</br>Realized that  several layers might have a similar config
+</br>and that the compiler has ways to priororitize config from  one layer over the other depending on the suffix applied on that
+</br>now the suffix can be - _append or _qemux86-64
+</br>for example-  the conf QB_CPU_KVM has 4 declarations and we need to override the priority , so we added 
+</br>_qemux86-64 as suffix
+</br># $QB_CPU_KVM [4 operations]
+</br>#   override[qemux86-64]:set /home/parth/AGL/build-qemux86-64-jailhouse-2/conf/local.conf:391
+</br>#     "-cpu host,-kvm-pv-eoi,-kvm-pv-ipi,-kvm-asyncpf,-kvm-steal-time,-kvmclock,-invpcid,-hypervisor"
+</br>#   override[x86]:set /home/parth/AGL/external/poky/meta/conf/machine/include/qemuboot-x86.inc:4
+</br>#     "-cpu core2duo"
+</br>#   override[x86-64]:set /home/parth/AGL/external/poky/meta/conf/machine/include/qemuboot-x86.inc:7
+</br>#     "-cpu core2duo"
+</br>#   override[x86-64]:set /home/parth/AGL/meta-agl/meta-agl-distro/conf/distro/include/x86_64-tune.inc:52
+</br>#     "-cpu kvm64 -cpu qemu64,+ssse3,+sse4.1,+sse4.2,+popcnt"
+</br># pre-expansion value:
+</br>#   "-cpu host,-kvm-pv-eoi,-kvm-pv-ipi,-kvm-asyncpf,-kvm-steal-time,-kvmclock,-invpcid,-hypervisor"
+</br>QB_CPU_KVM="-cpu host,-kvm-pv-eoi,-kvm-pv-ipi,-kvm-asyncpf,-kvm-steal-time,-kvmclock,-invpcid,-hypervisor"
+</br>#
+</br># $QB_CPU_KVM_qemux86-64
+</br>#   set /home/parth/AGL/build-qemux86-64-jailhouse-2/conf/local.conf:391
+</br>#     "-cpu host,-kvm-pv-eoi,-kvm-pv-ipi,-kvm-asyncpf,-kvm-steal-time,-kvmclock,-invpcid,-hypervisor"
+</br>QB_CPU_KVM_qemux86-64="-cpu host,-kvm-pv-eoi,-kvm-pv-ipi,-kvm-asyncpf,-kvm-steal-time,-kvmclock,-invpcid,-hypervisor"
+</br>#
+</br># $QB_CPU_KVM_x86
+</br>#   set /home/parth/AGL/external/poky/meta/conf/machine/include/qemuboot-x86.inc:4
+</br>#     "-cpu core2duo"
+</br>QB_CPU_KVM_x86="-cpu core2duo"
+</br>#
+</br># $QB_CPU_KVM_x86-64 [2 operations]
+</br>#   set /home/parth/AGL/external/poky/meta/conf/machine/include/qemuboot-x86.inc:7
+</br>#     "-cpu core2duo"
+</br>#   set /home/parth/AGL/meta-agl/meta-agl-distro/conf/distro/include/x86_64-tune.inc:52
+</br>#     "-cpu kvm64 -cpu qemu64,+ssse3,+sse4.1,+sse4.2,+popcnt"
+</br># pre-expansion value:
+</br>#   "-cpu kvm64 -cpu qemu64,+ssse3,+sse4.1,+sse4.2,+popcnt"
+</br>QB_CPU_KVM_x86-64="-cpu kvm64 -cpu qemu64,+ssse3,+sse4.1,+sse4.2,+popcnt"
+
+    
+
+
+
+                  </p>
+
+
+
+
+
+
+    </article>
+
+
+</section>
+
+
+
+
+
+<!--
+<aside class="sidebar big-sidebar right-sidebar">
+
+
+</aside>  -->
+
+      <div class="clear"></div>
+
+      </div>
+
+</div>
+
+    <footer>
+
+    </footer>
+</body>
+
+
+
+
+
+
+
+</html>

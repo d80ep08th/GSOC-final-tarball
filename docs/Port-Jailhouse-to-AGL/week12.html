@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset=“UTF-8”>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Port Jailhouse to agl </title>
+
+
+<link rel="stylesheet" href="reset.css" type="text/css" />
+<link rel="stylesheet" href="styles.css" type="text/css" />
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- google fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/slider.js"></script>
+<script type="text/javascript" src="js/superfish.js"></script>
+
+<script type="text/javascript" src="/js/custom.js"></script>
+
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+
+<!--
+deiform, a free CSS web template by ZyPOP (zypopwebtemplates.com/)
+
+Download: http://zypopwebtemplates.com/
+
+License: Creative Commons Attribution
+//-->
+
+<style media="screen">
+body {
+  background-image: url('starry.jpg') ;
+
+}
+
+</style>
+
+</head>
+
+
+
+<body>
+<div id="container" class="width">
+
+    <header>
+
+
+
+    <div class="width" id="Project">
+
+        <h1><a href="https://github.com/d80ep08th/Port-Jailhouse-to-AGL">Port Jailhouse to AGL</a></h1>
+
+<!--
+    <nav>
+
+	<ul class="sf-menu dropdown">
+
+
+	    <li class="selected"><a href="index.html">Home</a></li>
+
+    	    <li>
+
+	    <a href="examples.html">Style examples</a>
+
+	    <ul>
+        	        <li><a href="three-column.html">Three Column</a></li>
+	    <li><a href="one-column.html">One Column</a></li>
+            	        <li><a href="#">Another link</a></li>
+        	    </ul>
+
+    	    </li>
+
+    	    <li><a href="#">Services</a></li>
+
+	<li>
+
+	    <a href="#">Products</a>
+
+	    <ul>
+        	        <li><a href="#">Product One</a></li>
+            	    <li><a href="#">Product Two</a></li>
+            	    <li><a href="#">Product Three</a></li>
+        	    </ul>
+
+    	    </li>
+
+	<li><a href="#">Contact</a></li>
+	    </ul>
+
+
+        <div class="clear"></div>
+        </nav>
+        -->
+</div>
+
+<div class="clear" id="weeks">
+</br>
+<nav>
+
+      <ul class="sf-menu dropdown">
+
+
+          <li><a href="index.html">Home</a>
+          </li>
+
+
+
+          <li><a href="week1.html">Week1</a>
+
+                  <ul>
+                    <li><a href="three-column.html">Build an image for raspberry pi4 containing the jailhouse hypervisor to experiment with</a></li>
+
+                  </ul>
+          </li>
+
+          <li><a href="week2.html">Week2</a>
+
+                  <ul>
+                      <li><a href="#">Initialize jailhouse hypervisor on the raspi4 with the image built from jailhouse-images repo</a></li>
+                      <li><a href="#">Run an inmate in a jailhouse cell</a></li>
+                      <li><a href="#">Research the yocto project for building images for AGL.</a></li>
+                  </ul>
+          </li>
+
+          <li><a href="week3.html">Week3</a>
+            <ul>
+              <li><a href="#">Build minimal agl images  from yocto with jailhouse</a></li>
+              <li><a href="#">Build a jailhouse package based on a git repository commit</a></li>
+
+            </ul>
+          </li>
+
+          <li><a href="week4.html">Week4</a>
+            <ul>
+              <li><a href="#">Connect a raspberry pi 4 to a CAN bus module(controller-MCP2515 & transceiver-TJA1050)</a></li>
+
+            </ul>
+          </li>
+          <li><a href="week5.html">Week5</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week6.html">Week6</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week7.html">Week7</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week8.html">Week8</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week9.html">Week9</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week10.html">Week10</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week11.html">Week11</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li class="selected"><a href="week12.html">Week12</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          
+
+        </ul>
+
+
+  <div class="clear"></div>
+</nav>
+</div>
+</header>
+
+
+
+<div id="body" class="width">
+
+
+
+<section id="content" class="two-column with-right-sidebar">
+
+     <article>
+
+
+        <h2>
+
+	Week12
+        </h2>
+	<!-- <div class="article-info">Posted on <time datetime="2020-06-26">26 June</time></div>
+	-->
+                  <p>
+</br>Week 12 - 
+</br>
+</br>Further analysis of runqemu  and tweaking around with the kernel memmap option ( memmap=82M\$0x3a000000  )</br> which was taken from start-qemu.sh script in jailhouse-images made me realise that by increasing the value from 82M to 120M made it boot fast and successfully.
+</br>memmap : Enable setting of an exact E820 memory map, as specified by the user. Here the format is given  as[ nn\$ss ] ,</br> hence region of  memory to be used is from ss to ss+nn.
+</br>E820: e820 is shorthand for the facility by which the BIOS of x86-based computer systems reports the memory map to the</br> operating system or boot loader.
+</br>Once the qemux86-64 was booted , system configuration for the x86 system can be created using
+</br>jailhouse config create qemu-agl.c 
+</br>qemu-agl.c needs to be placed in the configs/x86/ directory of jailhouse.
+</br>The build system will pick up every .c file from there and generate a corresponding .cell file.
+</br>Then enable jailhouse using 
+</br>jailhouse enable  /usr/share/jailhouse/cells/qemu-agl.c
+</br>this starts the jailhouse hypervisor in qemux86-64.
+</br>I have pushed a commit for review , hoping to get it merged soon
+
+</br>-Parth Dode.
+    
+
+
+
+                  </p>
+
+
+
+
+
+
+    </article>
+
+
+</section>
+
+
+
+
+
+<!--
+<aside class="sidebar big-sidebar right-sidebar">
+
+
+</aside>  -->
+
+      <div class="clear"></div>
+
+      </div>
+
+</div>
+
+    <footer>
+
+    </footer>
+</body>
+
+
+
+
+
+
+
+</html>

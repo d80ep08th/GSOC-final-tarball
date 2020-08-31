@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset=“UTF-8”>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Port Jailhouse to agl </title>
+
+
+<link rel="stylesheet" href="reset.css" type="text/css" />
+<link rel="stylesheet" href="styles.css" type="text/css" />
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/slider.js"></script>
+<script type="text/javascript" src="js/superfish.js"></script>
+
+<script type="text/javascript" src="/js/custom.js"></script>
+
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+
+
+</head>
+
+
+
+<body>
+<div id="container" class="width">
+
+    <header>
+
+
+
+	<div class="width">
+
+    		<h1><a href="https://github.com/d80ep08th/Port-Jailhouse-to-AGL">Port Jailhouse to AGL</a></h1>
+
+<!--
+		<nav>
+
+    			<ul class="sf-menu dropdown">
+
+
+        			<li class="selected"><a href="index.html">Home</a></li>
+
+            			<li>
+
+					<a href="examples.html">Style examples</a>
+
+					<ul>
+                				<li><a href="three-column.html">Three Column</a></li>
+						<li><a href="one-column.html">One Column</a></li>
+                    				<li><a href="#">Another link</a></li>
+                			</ul>
+
+            			</li>
+
+	     			<li><a href="#">Services</a></li>
+
+				<li>
+
+					<a href="#">Products</a>
+
+					<ul>
+                				<li><a href="#">Product One</a></li>
+                   				<li><a href="#">Product Two</a></li>
+                   				<li><a href="#">Product Three</a></li>
+                			</ul>
+
+            			</li>
+
+				<li><a href="#">Contact</a></li>
+       			</ul>
+
+
+			<div class="clear"></div>
+    		</nav>
+			-->
+</div>
+
+<div class="clear">
+</br>
+<nav>
+
+      <ul class="sf-menu dropdown">
+
+
+          <li><a href="index.html">Home</a>
+          </li>
+
+
+
+          <li  class="selected"><a href="week1.html">Week1</a>
+
+                  <ul>
+                    <li><a href="three-column.html">Three Column</a></li>
+                    <li><a href="one-column.html">One Column</a></li>
+                    <li><a href="#">Another link</a></li>
+                  </ul>
+          </li>
+
+          <li><a href="week2.html">Week2</a>
+
+                  <ul>
+                      <li><a href="three-column.html">Initialize jailhouse hypervisor on the raspi4 with the image built from jailhouse-images repo</a></li>
+                      <li><a href="one-column.html">Run an inmate in a jailhouse cell</a></li>
+                      <li><a href="#">Research the yocto project for building images for AGL.</a></li>
+                  </ul>
+          </li>
+
+          <li><a href="week3.html">Week3</a>
+<!--
+      <ul>
+                    <li><a href="#">Product One</a></li>
+                      <li><a href="#">Product Two</a></li>
+                      <li><a href="#">Product Three</a></li>
+                  </ul>
+-->
+          </li>
+
+          <li><a href="week4.html">Week4</a>
+          </li>
+
+
+        </ul>
+
+
+  <div class="clear"></div>
+
+</header>
+
+
+    <div id="intro">
+
+	           <div class="width">
+
+		          <div class="intro-content">
+
+                    <h2>		Describe							 </h2>
+
+
+
+
+            	</div>
+
+            </div>
+
+
+	    </div>
+
+    <div id="body" class="width">
+
+
+
+		    <section id="content" class="two-column with-right-sidebar">
+
+	         <article>
+
+
+			<h2>Building Jailhouse image for Raspi 4</h2>
+			<div class="article-info">Posted on <time datetime="2020-06-6">6 June</time> by <a href="#" rel="author">Parth Dode [GSOC'20 week 2]</a></div>
+
+                  <p>
+
+
+
+
+                  </p>
+
+
+
+
+
+
+		    </article>
+
+
+      </section>
+
+<!--        <aside class="sidebar big-sidebar right-sidebar">
+
+
+</aside>  -->
+      <div class="clear"></div>
+      </div>
+    </div>
+
+    <footer>
+
+    </footer>
+
+
+</body>
+
+
+
+
+
+
+
+</html>

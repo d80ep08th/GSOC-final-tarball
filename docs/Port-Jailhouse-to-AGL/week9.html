@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset=“UTF-8”>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Port Jailhouse to agl </title>
+
+
+<link rel="stylesheet" href="reset.css" type="text/css" />
+<link rel="stylesheet" href="styles.css" type="text/css" />
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+<!-- google fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/slider.js"></script>
+<script type="text/javascript" src="js/superfish.js"></script>
+
+<script type="text/javascript" src="/js/custom.js"></script>
+
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+
+<!--
+deiform, a free CSS web template by ZyPOP (zypopwebtemplates.com/)
+
+Download: http://zypopwebtemplates.com/
+
+License: Creative Commons Attribution
+//-->
+
+<style media="screen">
+body {
+  background-image: url('starry.jpg') ;
+
+}
+
+</style>
+
+</head>
+
+
+
+<body>
+<div id="container" class="width">
+
+    <header>
+
+
+
+    <div class="width" id="Project">
+
+        <h1><a href="https://github.com/d80ep08th/Port-Jailhouse-to-AGL">Port Jailhouse to AGL</a></h1>
+
+<!--
+    <nav>
+
+	<ul class="sf-menu dropdown">
+
+
+	    <li class="selected"><a href="index.html">Home</a></li>
+
+    	    <li>
+
+	    <a href="examples.html">Style examples</a>
+
+	    <ul>
+        	        <li><a href="three-column.html">Three Column</a></li>
+	    <li><a href="one-column.html">One Column</a></li>
+            	        <li><a href="#">Another link</a></li>
+        	    </ul>
+
+    	    </li>
+
+    	    <li><a href="#">Services</a></li>
+
+	<li>
+
+	    <a href="#">Products</a>
+
+	    <ul>
+        	        <li><a href="#">Product One</a></li>
+            	    <li><a href="#">Product Two</a></li>
+            	    <li><a href="#">Product Three</a></li>
+        	    </ul>
+
+    	    </li>
+
+	<li><a href="#">Contact</a></li>
+	    </ul>
+
+
+        <div class="clear"></div>
+        </nav>
+        -->
+</div>
+
+<div class="clear" id="weeks">
+</br>
+<nav>
+
+      <ul class="sf-menu dropdown">
+
+
+          <li><a href="index.html">Home</a>
+          </li>
+
+
+
+          <li><a href="week1.html">Week1</a>
+
+                  <ul>
+                    <li><a href="three-column.html">Build an image for raspberry pi4 containing the jailhouse hypervisor to experiment with</a></li>
+
+                  </ul>
+          </li>
+
+          <li><a href="week2.html">Week2</a>
+
+                  <ul>
+                      <li><a href="#">Initialize jailhouse hypervisor on the raspi4 with the image built from jailhouse-images repo</a></li>
+                      <li><a href="#">Run an inmate in a jailhouse cell</a></li>
+                      <li><a href="#">Research the yocto project for building images for AGL.</a></li>
+                  </ul>
+          </li>
+
+          <li><a href="week3.html">Week3</a>
+            <ul>
+              <li><a href="#">Build minimal agl images  from yocto with jailhouse</a></li>
+              <li><a href="#">Build a jailhouse package based on a git repository commit</a></li>
+
+            </ul>
+          </li>
+
+          <li><a href="week4.html">Week4</a>
+            <ul>
+              <li><a href="#">Connect a raspberry pi 4 to a CAN bus module(controller-MCP2515 & transceiver-TJA1050)</a></li>
+
+            </ul>
+          </li>
+          <li><a href="week5.html">Week5</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week6.html">Week6</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week7.html">Week7</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week8.html">Week8</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li class="selected"><a href="week9.html">Week9</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week10.html">Week10</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week11.html">Week11</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          <li><a href="week12.html">Week12</a>
+            <ul>
+              <li><a href="#"></a></li>
+
+            </ul>
+          </li>
+          
+
+        </ul>
+
+
+  <div class="clear"></div>
+</nav>
+</div>
+</header>
+
+
+
+<div id="body" class="width">
+
+
+
+<section id="content" class="two-column with-right-sidebar">
+
+     <article>
+
+
+        <h2>
+
+	Week9
+        </h2>
+	<!-- <div class="article-info">Posted on <time datetime="2020-06-26">26 June</time></div>
+	-->
+                  <p></br>
+This week: Create a conf file with the qemu boot variables and their values</br> required for jailhouse to run
+Thing is when you  start qemu and try to run " jailhouse hardware check" ,</br> the check must be passed for jailhouse to actually run. 
+Now this is the updated script that I used to run qemu:-</br>
+</br>qemu-system-x86_64 \</br>
+</br>-m 1024 \</br>
+</br>-drive file=./tmp/deploy/images/qemux86-64/agl-image-minimal-qemux86-64.ext4,discard=unmap,if=none,id=disk,format=raw \
+</br>-serial vc -serial mon:stdio -netdev user,id=net \
+</br>-kernel ./tmp/deploy/images/qemux86-64/bzImage \
+</br>-append "root=/dev/sda intel_iommu=off memmap=82M\$0x3a000000 mem=1G vga=0x305 console=ttyS0,115200n8" \
+</br>-cpu host,-kvm-pv-eoi,-kvm-pv-ipi,-kvm-asyncpf,-kvm-steal-time,-kvmclock,-invpcid,-hypervisor \
+</br>-smp 4 \
+</br>-enable-kvm \
+</br>-machine q35,kernel_irqchip=split \
+</br>-device ide-hd,drive=disk \
+</br>-device intel-iommu,intremap=on,x-buggy-eim=on \
+</br>-device intel-hda,addr=1b.0 \
+</br>-device hda-duplex \
+</br>-device e1000e,addr=2.0,netdev=net \
+ 
+</br>The above script does seem to pass the checks
+
+</br>Feature                         Availability
+</br>
+</br>------------------------------  ------------------
+</br>
+</br>Number of CPUs > 1              ok
+</br>
+</br>Long mode                       ok
+</br>
+</br>x2APIC                          ok
+</br>
+</br>
+</br>VT-x (VMX)                      ok
+</br>
+</br>  VMX outside SMX               ok
+</br>
+</br>  VMX inside SMX                missing (optional)
+</br>
+</br>  IA32_TRUE_*_CLTS            ok
+</br>
+</br>  NMI exiting                   ok
+</br>
+</br>  Preemption timer              ok
+</br>
+</br>  I/O bitmap                    ok
+</br>
+</br>  MSR bitmap                    ok
+</br>
+</br>  Secondary controls            ok
+</br>
+</br>  Optional CR3 interception     ok
+</br>
+</br>  Virtualize APIC access        ok
+</br>
+</br>  RDTSCP                        ok
+</br>
+</br>  Unrestricted guest            ok
+</br>
+</br>  INVPCID                       missing (optional)
+</br>
+</br>  XSAVES                        ok
+</br>
+</br>  EPT                           ok
+</br>
+</br>    4-level page walk           ok
+</br>
+</br>    EPTP write-back             ok
+</br>
+</br>    2M pages                    ok
+</br>    1G pages                    missing (optional)
+</br>
+</br>    INVEPT                      ok
+</br>
+</br>      Single or all-context     ok
+</br>
+</br>  VM-exit save IA32_PAT         ok
+</br>
+</br>  VM-exit load IA32_PAT         ok
+</br>
+</br>  VM-exit save IA32_EFER        ok
+</br>
+</br>  VM-exit load IA32_EFER        ok</br>
+</br>
+</br>  VM-entry load IA32_PAT        ok</br>
+</br>
+</br>  VM-entry load IA32_EFER       ok</br>
+</br>
+</br>  Activity state HLT            ok</br>
+
+</br>
+</br>VT-d (IOMMU #0)                 ok</br>
+</br>
+  39-bit AGAW                   ok</br>
+</br>
+  48-bit AGAW                   missing (optional)</br>
+
+  2M pages                      ok</br>
+</br>
+  1G pages                      ok</br>
+</br>
+  Queued invalidation           ok</br>
+</br>
+  Interrupt remapping           ok</br>
+</br>
+  Extended interrupt mode       ok</br>
+</br>
+</br>
+Check passed!</br>
+</br>
+ 
+This is the default qemuboot.conf file you get by default - tmp/deploy/images/qemux86-64/agl-image-minimal-qemux86-64-*.qemuboot.conf </br>
+[config_bsp]</br>
+deploy_dir_image = .</br>
+image_link_name = agl-image-minimal-qemux86-64</br>
+image_name = agl-image-minimal-qemux86-64-20200721164637</br>
+kernel_imagetype = bzImage</br>
+machine = qemux86-64</br>
+qb_audio_drv = alsa</br>
+qb_audio_opt = -soundhw hda</br>
+qb_cmdline_ip_slirp = ip=dhcp</br>
+qb_cmdline_ip_tap = ip=192.168.7.@CLIENT@::192.168.7.@GATEWAY@:255.255.255.0</br>
+qb_cpu = -cpu qemu64,+ssse3,+sse4.1,+sse4.2,+popcnt</br>
+qb_cpu_kvm = -cpu kvm64 -cpu qemu64,+ssse3,+sse4.1,+sse4.2,+popcnt</br>
+qb_cpu_kvm_x86 = -cpu core2duo</br>
+qb_cpu_kvm_x86-64 = -cpu kvm64 -cpu qemu64,+ssse3,+sse4.1,+sse4.2,+popcnt</br>
+qb_cpu_x86 = -cpu core2duo</br>
+qb_cpu_x86-64 = -cpu qemu64,+ssse3,+sse4.1,+sse4.2,+popcnt</br>
+qb_default_fstype = ext4</br>
+qb_default_kernel = bzImage--5.4.43+git0+aafb8f095e_9e1b13d7f9-r0-qemux86-64-20200721164637.bin</br>
+qb_drive_type = /dev/sd</br>
+qb_kernel_cmdline_append = oprofile.timer=1 console=ttyS0,115200n8 quiet</br>
+qb_machine = -machine q35</br>
+qb_mem = -m 2048</br>
+qb_network_device = -device virtio-net-pci,netdev=net0,mac=@MAC@</br>
+qb_opt_append = -vga vmware -show-cursor -usb -device usb-tablet -device virtio-rng-pci -vga virtio</br>
+qb_serial_opt = -serial mon:stdio -serial null</br>
+qb_system_name = qemu-system-x86_64</br>
+qb_system_name_x86-64 = qemu-system-x86_64</br>
+staging_bindir_native = ../../../work/x86_64-linux/qemu-helper-native/1.0-r1/recipe-sysroot-native/usr/bin</br>
+staging_dir_host = ../../../work/qemux86_64-agl-linux/agl-image-minimal/1.0-r0/recipe-sysroot</br>
+staging_dir_native = ../../../work/qemux86_64-agl-linux/agl-image-minimal/1.0-r0/recipe-sysroot-native</br>
+tune_arch = x86_64</br>
+
+</br>We then add a new conf file in our meta-agl-jailhouse , sorting out the updated script wrt the QB variables and then build the recipe so that when we use runqemu , the required script runs by default</br>
+</br>The following variables need to be filled for runqemu -</br>
+</br>QB_SYSTEM_NAME:,QB_OPT_APPEND:,QB_DEFAULT_KERNEL:,QB_DEFAULT_FSTYPE:,</br>QB_MEM:,QB_MACHINE:,QB_CPU:,QB_CPU_KVM:,QB_KERNEL_CMDLINE_APPEND:,QB_DTB:,QB_AUDIO_DRV:,QB_AUDIO_OPT:,QB_KERNEL_ROOT:,QB_NETWORK_DEVICE:,
+</br>QB_TAP_OPT:,QB_SLIRP_OPT:,QB_CMDLINE_IP_SLIRP:,QB_CMDLINE_IP_TAP:,QB_ROOTFS_OPT:,</br>QB_SERIAL_OPT:,QB_TCPSERIAL_OPT:,QB_ROOTFS_EXTRA_OPT:</br>
+</br>
+
+</br>Ended up setting up fresh new can boards with respective rpi's and connecting them.</br>
+
+    
+
+
+
+                  </p>
+
+
+
+
+
+
+    </article>
+
+
+</section>
+
+
+
+
+
+<!--
+<aside class="sidebar big-sidebar right-sidebar">
+
+
+</aside>  -->
+
+      <div class="clear"></div>
+
+      </div>
+
+</div>
+
+    <footer>
+
+    </footer>
+</body>
+
+
+
+
+
+
+
+</html>
