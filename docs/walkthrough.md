@@ -2,7 +2,7 @@
 
 ###Port Jailhouse to AGL
 
-##Walkthrough
+*italic*Walkthrough
 
 
 We use AGL as the main OS to install a hypervisor on an AGL reference platform.
