@@ -5,94 +5,6 @@
         Walkthrough
 
 
-
-
-             Week1
-
-		<ul>
-            	    Build an image for raspberry pi4 containing the jailhouse hypervisor to experiment with
-
-		</ul>
-    	    </li>
-
-            <li><a href="week2.html">Week2</a>
-
-        	<ul>
-            	    <li><a href="#">Initialize jailhouse hypervisor on the raspi4 with the image built from jailhouse-images repo</a></li>
-            	    <li><a href="#">Run an inmate in a jailhouse cell</a></li>
-            	    <li><a href="#">Research the yocto project for building images for AGL.</a></li>
-            	</ul>
-            </li>
-
-            <li><a href="week3.html">Week3</a>
-        	<ul>
-            	    <li><a href="#">Build minimal agl images  from yocto with jailhouse</a></li>
-            	    <li><a href="#">Build a jailhouse package based on a git repository commit</a></li>
-        	</ul>
-            </li>
-
-	    <li><a href="week4.html">Week4</a>
-        	<ul>
-            	    <li><a href="#">Connect a raspberry pi 4 to a CAN bus module(controller-MCP2515 & transceiver-TJA1050)</a></li>
-        	</ul>
-	    </li>
-
-	   <li><a href="week5.html">Week5</a>
-        	<ul>
-            	    <li><a href="#"></a></li>
-
-		</ul>
-            </li>
-
-    	    <li><a href="week5.html">Week6</a>
-        	<ul>
-            	    <li><a href="#"></a></li>
-        	</ul>
-            </li>
-
-	    <li><a href="week7.html">Week7</a>
-    		<ul>
-    		    <li><a href="#"></a></li>
-        	</ul>
-            </li>
-
-	    <li><a href="week8.html">Week8</a>
-        	<ul>
-            	    <li><a href="#"></a></li>
-        	</ul>
-            </li>
-
-	    <li><a href="week9.html">Week9</a>
-        	<ul>
-            	    <li><a href="#"></a></li>
-        	</ul>
-            </li>
-
-	    <li><a href="week10.html">Week10</a>
-        	<ul>
-    	    	    <li><a href="#"></a></li>
-        	</ul>
-            </li>
-
-            <li><a href="week11.html">Week11</a>
-        	<ul>
-            	    <li><a href="#"></a></li>
-        	</ul>
-            </li>
-
-	    <li><a href="week12.html">Week12</a>
-        	<ul>
-            	    <li><a href="#"></a></li>
-        	</ul>
-            </li>
-
-	</ul>
-
-
-		   A long time ago, in a galaxy far far away  a jedi made a walkthrough
-
-
-
     We use AGL as the main OS to install a hypervisor on an AGL reference platform.
 
 
@@ -108,10 +20,10 @@
 
 
 
-	    Download the AGL master branch  
+	  Download the AGL master branch  
 
-	Run the following commands consecutively in the directory
-	 where you want to build the AGL OS
+    Run the following commands consecutively in the directory
+    where you want to build the AGL OS
 
 
 		<p>
