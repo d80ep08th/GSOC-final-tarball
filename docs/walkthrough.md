@@ -1,37 +1,36 @@
 
 
-        Port Jailhouse to AGL
+Port Jailhouse to AGL
 
-        Walkthrough
-
-
-    We use AGL as the main OS to install a hypervisor on an AGL reference platform.
+Walkthrough
 
 
-		We can then partition the CPU using that hypervisor.
+We use AGL as the main OS to install a hypervisor on an AGL reference platform.
 
-		This hypervisor will give the RTOS a virtual operating platform.
+We can then partition the CPU using that hypervisor.
 
-		This is where the Jailhouse hypervisor becomes a core part of the project.
+This hypervisor will give the RTOS a virtual operating platform.
 
-		The RTOS running as guest on the hypervisor can then procure data in real time and communicate it with the AGL OS.
+This is where the Jailhouse hypervisor becomes a core part of the project.
 
+The RTOS running as guest on the hypervisor can then procure data in real time and communicate it with the AGL OS.
 
 
 
 
-	  Download the AGL master branch  
 
-    Run the following commands consecutively in the directory
-    where you want to build the AGL OS
+Download the AGL master branch
+
+Run the following commands consecutively in the directory
+Where you want to build the AGL OS
 
 
-		<p>
+
 		$ mkdir AGL
 		$ cd AGL
 		$ repo init -u https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo
 		$ repo sync
-		</p>
+
 
 
 	You can click here to get a more verbose guide to cloning AGL:
