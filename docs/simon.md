@@ -1,73 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-
-<meta charset=“UTF-8”>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Port Jailhouse to agl </title>
 
 
-<link rel="stylesheet" href="reset.css" type="text/css" />
-<link rel="stylesheet" href="styles.css" type="text/css" />
-<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+        Port Jailhouse to AGL
 
-<!-- google fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-
-<!--[if lt IE 9]>
-<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
-
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/slider.js"></script>
-<script type="text/javascript" src="js/superfish.js"></script>
-
-<script type="text/javascript" src="/js/custom.js"></script>
-
-<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
-
-
-<style media="screen">
-body {
-  background-image: url('starry.jpg');
-
-}
-</style>
-
-</head>
+        Walkthrough
 
 
 
-<body>
-    <div id="container" class="width">
 
-    <header>
-
-
-
-	<div class="width" id="Project">
-
-	<h1><a href="https://github.com/d80ep08th/Port-Jailhouse-to-AGL">Port Jailhouse to AGL</a></h1>
-
-	</div>
-
-    <div class="clear" id="weeks"></br>
-
-    <nav>
-
-	<ul class="sf-menu dropdown">
-
-
-	    <li class="selected"><a href="index.html">Walkthrough</a>
-            </li>
-
-
-
-             <li><a href="week1.html">Week1</a>
+             Week1
 
 		<ul>
-            	    <li><a href="three-column.html">Build an image for raspberry pi4 containing the jailhouse hypervisor to experiment with</a></li>
+            	    Build an image for raspberry pi4 containing the jailhouse hypervisor to experiment with
 
 		</ul>
     	    </li>
@@ -93,7 +36,7 @@ body {
             	    <li><a href="#">Connect a raspberry pi 4 to a CAN bus module(controller-MCP2515 & transceiver-TJA1050)</a></li>
         	</ul>
 	    </li>
-	
+
 	   <li><a href="week5.html">Week5</a>
         	<ul>
             	    <li><a href="#"></a></li>
@@ -118,13 +61,13 @@ body {
             	    <li><a href="#"></a></li>
         	</ul>
             </li>
-          
+
 	    <li><a href="week9.html">Week9</a>
         	<ul>
             	    <li><a href="#"></a></li>
         	</ul>
             </li>
-         
+
 	    <li><a href="week10.html">Week10</a>
         	<ul>
     	    	    <li><a href="#"></a></li>
@@ -136,7 +79,7 @@ body {
             	    <li><a href="#"></a></li>
         	</ul>
             </li>
-         
+
 	    <li><a href="week12.html">Week12</a>
         	<ul>
             	    <li><a href="#"></a></li>
@@ -146,263 +89,209 @@ body {
 	</ul>
 
 
-	<div class="clear"></div>
-    </nav>
-
-    </div>
-    </header>
+		   A long time ago, in a galaxy far far away  a jedi made a walkthrough
 
 
-    <div id="intro">
 
-	<div class="width">
-	    <div class="intro-content" >
+    We use AGL as the main OS to install a hypervisor on an AGL reference platform.
 
-		<h2>A long time ago, in a galaxy far far away</br> a jedi made a walkthrough</h2></br>
-                </br>
-                </br>
-                </br>
-		<h5>
-                We use AGL as the main OS to install a hypervisor on an AGL reference platform. 
-		</br>
-                </br>
-		We can then partition the CPU using that hypervisor.</br>
-		</br>
-		This hypervisor will give the RTOS a virtual operating platform.</br>
-		</br>
-		This is where the Jailhouse hypervisor becomes a core part of the project.</br>
-		</br>
-		The RTOS running as guest on the hypervisor can then procure data in real time and communicate it with the AGL OS.</br>
-		</br>
-		</h5>
 
-	    </div>
-	</div>
-    </div>
+		We can then partition the CPU using that hypervisor.
 
-    <div id="body" class="width">
+		This hypervisor will give the RTOS a virtual operating platform.
 
-    <div>
-<!-- Cloning AGL -->
-    <section>
+		This is where the Jailhouse hypervisor becomes a core part of the project.
 
-	</br>
-	</br>
-	</br>
-	<h2> Download the AGL master branch </h2>
-	
-	Run the following commands consecutively in the directory</br>
-	 where you want to build the AGL OS</br>
-    </section>
+		The RTOS running as guest on the hypervisor can then procure data in real time and communicate it with the AGL OS.
 
-	<section id="content" class="two-column with-right-sidebar">
 
-	    <article>
+
+
+
+	    Download the AGL master branch  
+
+	Run the following commands consecutively in the directory
+	 where you want to build the AGL OS
+
 
 		<p>
-		$ mkdir AGL</br>
-		$ cd AGL</br>
-		$ repo init -u https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo</br>
-		$ repo sync</br>
+		$ mkdir AGL
+		$ cd AGL
+		$ repo init -u https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo
+		$ repo sync
 		</p>
 
-	    </article>
-
-	</section>
-	
 
 	You can click here to get a more verbose guide to cloning AGL:
 	<a href="https://wiki.automotivelinux.org/agl-distro/source-code">SOURCE CODE</a>
-	</br>
-    </br>
-    </div>
-    
-    <div>
-<!-- Inside Build Dir -->
-    <section>
 
-	</br>
-	</br>
-	</br>
-	<h2>Create the Build Directory</h2></br>
-	
-	To build the QEMU version of the AGL OS with the Jailhouse hypervisor</br>
-	</br>
-	</br>
+
+
+
+
+<!-- Inside Build Dir -->
+
+
+
+
+
+	   Create the Build Directory
+
+	To build the QEMU version of the AGL OS with the Jailhouse hypervisor
+
+
 	Run the following command, it will build a directory where all the work specific to that
 	build will be stored.
-	
-	
-    </section>
+
+
+
 
 	<section id="content" class="two-column with-right-sidebar" >
 
 		<p>
 
-		$ source /meta-agl/scripts/aglsetup.sh -m qemux86-64 -b build-dir-name agl-demo agl-devel agl-jailhouse</br>
-		</br>
-		##this will automotically change the directory to the build-dir-name/ </br>
+		$ source /meta-agl/scripts/aglsetup.sh -m qemux86-64 -b build-dir-name agl-demo agl-devel agl-jailhouse
+
+		##this will automotically change the directory to the build-dir-name/  
 		##structure of this direct-tree :)
-		##.</br>
-		##├── agl-init-build-env</br>
-		##├── aglsetup.manifest</br>
-		##└── conf</br>
-		####    ├── bblayers.conf</br>
-		####    ├── fragments.log</br>
-		####    ├── local.conf</br>
-		####    ├── setup.log</br>
-		####    └── templateconf.cfg</br>
+		##.
+		##├── agl-init-build-env
+		##├── aglsetup.manifest
+		##└── conf
+		####    ├── bblayers.conf
+		####    ├── fragments.log
+		####    ├── local.conf
+		####    ├── setup.log
+		####    └── templateconf.cfg
 
 		</p>
-	</section>
-	The following are features and why they are used: </br>
-	agl-demo: enable layer meta-agl-demo and meta-qt5 - required to build agl-demo-platform </br>
-	agl-devel: activate development options (empty root password, debugger, strace, valgrind …)</br>
-	agl-jailhouse : enable layer meta-agl-jailhouse , required to build the out-of-kernel Jailhouse module </br>
-    </br>
-    </div>
-    
-    <div>
-    <section>
+	The following are features and why they are used:  
+	agl-demo: enable layer meta-agl-demo and meta-qt5 - required to build agl-demo-platform  
+	agl-devel: activate development options (empty root password, debugger, strace, valgrind …)
+	agl-jailhouse : enable layer meta-agl-jailhouse , required to build the out-of-kernel Jailhouse module  
 
-	</br>
-	</br>
-	</br>
+
+
+
+
 	source this script to be able to start bit-baking(or in fancy words, to initialize the build environment)
 
-    </section>
-
-	<section id="content" class="two-column with-right-sidebar" >
 
 		<p>
 
-		$ source agl-init-build-dev</br>
-<h5>
-<a>
-Common targets are:</br>
-- meta-agl layer:</br>
-  - included by default</br>
-    * agl-image-boot                (just enough to boot)</br>
-    * agl-image-minimal             (minimal filesystem with APIs)</br>
-    * agl-image-minimal-crosssdk    (crosssdk for ^^)</br>
-</br>
-  - with 'agl-profile-graphical'</br>
-    * agl-image-weston              (minimal filesystem with weston)</br>
-</br>
-  - with 'agl-profile-graphical-qt5'</br>
-    * agl-image-graphical-qt5       (weston plus qt5 framework libs)</br>
-    * agl-image-graphical-qt5-crosssdk  (crosssdk for ^^)</br>
-</br>
-  - with 'agl-profile-graphical-html5'</br>
-    * agl-image-graphical-html5     (weston plus chromium for html5)</br>
-</br>
-  - with 'agl-profile-cluster'</br>
-    * agl-image-cluster             (minimal image with APIs for cluster)</br>
+		$ source agl-init-build-dev
 
-  - with 'agl-profile-cluster-qt5'</br>
-    * agl-image-cluster-qt5         (image with QT5 and APIs for cluster)</br>
 
-  - with 'agl-profile-telematics'</br>
-    * agl-image-telematics          (image with APIs for telematics)</br>
-</br>
-- meta-agl-cluster-demo layer:      (Instrument Cluster demo with UI)</br>
-  - with 'agl-cluster-demo'</br>
-    * agl-cluster-demo-platform     (cluster demo image)</br>
-    * agl-cluster-demo-platform-crosssdk  (sdk for ^^)</br>
-    * agl-cluster-demo-qtcompositor (cluster demo using own compositor)</br>
-</br>
-- meta-agl-telematics-demo layer:   (Telematics demo w/o UI)</br>
-  - with 'agl-telematics-demo'</br>
-    * agl-telematics-demo-platform  (telematics demo image)</br>
-    * agl-telematics-demo-platform-crosssdk  (sdk for ^^)</br>
-</br>
-- meta-agl-demo:                    (IVI demo with UI)</br>
-  - with 'agl-demo'</br>
-    * agl-image-ivi                 (base for IVI targets)</br>
-    * agl-image-ivi-crosssdk           (sdk for ^^)</br>
-</br>
-    * agl-demo-platform             (* default IVI demo target *)</br>
-    * agl-demo-platform-crosssdk       (sdk for ^^)</br>
-</br>
-</a>
-</h5>
+Common targets are:
+- meta-agl layer:
+  - included by default
+    * agl-image-boot                (just enough to boot)
+    * agl-image-minimal             (minimal filesystem with APIs)
+    * agl-image-minimal-crosssdk    (crosssdk for ^^)
+
+  - with 'agl-profile-graphical'
+    * agl-image-weston              (minimal filesystem with weston)
+
+  - with 'agl-profile-graphical-qt5'
+    * agl-image-graphical-qt5       (weston plus qt5 framework libs)
+    * agl-image-graphical-qt5-crosssdk  (crosssdk for ^^)
+
+  - with 'agl-profile-graphical-html5'
+    * agl-image-graphical-html5     (weston plus chromium for html5)
+
+  - with 'agl-profile-cluster'
+    * agl-image-cluster             (minimal image with APIs for cluster)
+
+  - with 'agl-profile-cluster-qt5'
+    * agl-image-cluster-qt5         (image with QT5 and APIs for cluster)
+
+  - with 'agl-profile-telematics'
+    * agl-image-telematics          (image with APIs for telematics)
+
+- meta-agl-cluster-demo layer:      (Instrument Cluster demo with UI)
+  - with 'agl-cluster-demo'
+    * agl-cluster-demo-platform     (cluster demo image)
+    * agl-cluster-demo-platform-crosssdk  (sdk for ^^)
+    * agl-cluster-demo-qtcompositor (cluster demo using own compositor)
+
+- meta-agl-telematics-demo layer:   (Telematics demo w/o UI)
+  - with 'agl-telematics-demo'
+    * agl-telematics-demo-platform  (telematics demo image)
+    * agl-telematics-demo-platform-crosssdk  (sdk for ^^)
+
+- meta-agl-demo:                    (IVI demo with UI)
+  - with 'agl-demo'
+    * agl-image-ivi                 (base for IVI targets)
+    * agl-image-ivi-crosssdk           (sdk for ^^)
+
+    * agl-demo-platform             (* default IVI demo target *)
+    * agl-demo-platform-crosssdk       (sdk for ^^)
+
 		</p>
 
-	</section>
-	
+
     <img> shows the output given by agl-init-build-dev </img>
-    </br>
-    </div>
 
-    <div>
-    <section>
-	</br>
-	</br>
-	</br>
-	<h2> Bitbake </h2>
-	
 
-	NOTE : THIS MAY TAKE ALOT OF TIME(hours) TO BUILD</br>
-	</br>
-	[ DEPENDING ON HOW POWERFUL YOUR MACHINE IS]</br>
-	</br>
-	[Even the most powerful machine will take atleast half an hr to get done with the build]</br>
-	</br>
-	You can manipulate this to some extent by properly assigning the variables </br>
-	</br>
-	DL_DIR & SSTATE_DIR in conf/local.conf in your build-directory.</br>
-	</br>
-	bitbake will by default create a tmp/ directory on the first build</br> 
-	where all the work is stored </br>
-	You can delete this directory if something goes wrong and restart the build </br>
-	</br>
-    </section>
 
-	<section id="content" class="two-column with-right-sidebar" >
+
+	    Bitbake  
+
+
+	NOTE : THIS MAY TAKE ALOT OF TIME(hours) TO BUILD
+
+	[ DEPENDING ON HOW POWERFUL YOUR MACHINE IS]
+
+	[Even the most powerful machine will take atleast half an hr to get done with the build]
+
+	You can manipulate this to some extent by properly assigning the variables  
+
+	DL_DIR & SSTATE_DIR in conf/local.conf in your build-directory.
+
+	bitbake will by default create a tmp/ directory on the first build  
+	where all the work is stored  
+	You can delete this directory if something goes wrong and restart the build  
+
+
 
 		<p>
-		
-			
-			$ bitbake agl-image-minimal</br>
-			##the above command will build the OS , enough to be able to boot on qemux86-64</br>
-			##this will build both the jailhouse module and the kernel but,</br>
-			</br>
-			##you can specifically build the jailhouse module (for changes you make to its layer)</br>
-			##$ bitbake jailhouse</br>
-			
-			##You can also do the same for the kernel.</br>
-			##To get kernel source tree, you have to build kernel once</br>
-			##$ bitbake virtual/kernel</br>
-		
+
+
+			$ bitbake agl-image-minimal
+			##the above command will build the OS , enough to be able to boot on qemux86-64
+			##this will build both the jailhouse module and the kernel but,
+
+			##you can specifically build the jailhouse module (for changes you make to its layer)
+			##$ bitbake jailhouse
+
+			##You can also do the same for the kernel.
+			##To get kernel source tree, you have to build kernel once
+			##$ bitbake virtual/kernel
+
 		</p>
 
-	</section>
-	To know more about bitbake and what it can do, click here:
-	<a href="https://www.yoctoproject.org/docs/1.6/bitbake-user-manual/bitbake-user-manual.html">BITBAKE</a>
-		To read more about the way directories are structured and their purpose , click here:
-		<a href="http://git.yoctoproject.org/cgit.cgi/poky/plain/README.structure?h=blinky"> POKY DIRECTORY TREE </a>
-    </br>
-    </div>
+	      To know more about bitbake and what it can do, click here:
+	      <a href="https://www.yoctoproject.org/docs/1.6/bitbake-user-manual/bitbake-user-manual.html">BITBAKE</a>
+		    To read more about the way directories are structured and their purpose , click here:
+		    <a href="http://git.yoctoproject.org/cgit.cgi/poky/plain/README.structure?h=blinky"> POKY DIRECTORY TREE </a>
 
-    <div>
-    <section>
-	</br>
-	</br>
-	</br>
 
-		<h2> Qemu x86-64</h2></br>
-	
 
-    
 
-		
+
+		    Qemu x86-64
+
+
+
+
+
 
 		<p>
 			<!-- $bitbake -e | grep -i ^QB -->
-			##this will start the qemu machine based on the preconfigured QB(qemu-boot) variables</br>
-			## Use the command--> $ bitbake -e | grep -i ^QB </br>##to checkout the configuration</br>
-			
-			$ runqemu slirp kvm nographic</br>
+			##this will start the qemu machine based on the preconfigured QB(qemu-boot) variables
+			## Use the command--> $ bitbake -e | grep -i ^QB  ##to checkout the configuration
+
+			$ runqemu slirp kvm nographic
 
 		</p>
 
@@ -413,25 +302,25 @@ Common targets are:</br>
 
 
 
-    
+
 
 	<!-- Connecting to the qemu machine externally -->
-	
-	
 
-		
+
+
+
 
 		<p>
-		## Externally connect to the qemu machine by executing this command</br>
-		## on another shell on the same machine </br>
+		## Externally connect to the qemu machine by executing this command
+		## on another shell on the same machine  
 
 		## This will help us view the progress of Jailhouse hypervisor in a more verbose manner
-		</br>
-		    $ nc localhost 4321</br>
+
+		    $ nc localhost 4321
 		</p>
 
 
-	
+
 	<img src="porting/login.png"></img>
 
 
@@ -442,85 +331,85 @@ Common targets are:</br>
 
 
 
-	
+
 
 		<p>
-		    $ jailhouse hardware check </br>
-<a>
-	Feature				Availability</br>
-	------------------------------	------------------</br>
-	Number of CPUs > 1		ok</br>
-	Long mode			ok</br>
-	x2APIC				ok</br>
+		    $ jailhouse hardware check  
 
-	  VT-x (VMX)			ok</br>
-	  VMX outside SMX		ok</br>
-	  VMX inside SMX		missing (optional)</br>
-	  IA32_TRUE_*_CLTS		ok</br>
-	  NMI exiting			ok</br>
-	  Preemption timer		ok</br>
-	  I/O bitmap			ok</br>
-	  MSR bitmap			ok</br>
-	  Secondary controls		ok</br>
-	  Optional CR3 interception	ok</br>
-	  Virtualize APIC access	ok</br>
-	  RDTSCP			ok</br>
-	 Unrestricted guest		ok</br>
-	 INVPCID			missing (optional)</br>
-	 XSAVES			ok</br>
-	  EPT				ok</br>
-	    4-level page walk		ok</br>
-	    EPTP write-back		ok</br>
-	    2M pages			ok</br>
-	    1G pages			missing (optional)</br>
-	    INVEPT			ok</br>
-	      Single or all-context	ok</br>
-	  VM-exit save IA32_PAT		ok</br>
-	  VM-exit load IA32_PAT		ok</br>
-	  VM-exit save IA32_EFER	ok</br>
-	  VM-exit load IA32_EFER	ok</br>
-	  VM-entry load IA32_PAT	ok</br>
-	  VM-entry load IA32_EFER	ok</br>
-	  Activity state HLT		ok</br>
+	Feature				Availability
+	------------------------------	------------------
+	Number of CPUs > 1		ok
+	Long mode			ok
+	x2APIC				ok
 
-	VT-d (IOMMU #0)			ok</br>
-	  39-bit AGAW			ok</br>
-	  48-bit AGAW			missing (optional)</br>
-	  2M pages			ok</br>
-	  1G pages			ok</br>
-	  Queued invalidation		ok</br>
-	  Interrupt remapping		ok</br>
-	  Extended interrupt mode	ok</br>
-</br>
-	Check passed!</br>
+	  VT-x (VMX)			ok
+	  VMX outside SMX		ok
+	  VMX inside SMX		missing (optional)
+	  IA32_TRUE_*_CLTS		ok
+	  NMI exiting			ok
+	  Preemption timer		ok
+	  I/O bitmap			ok
+	  MSR bitmap			ok
+	  Secondary controls		ok
+	  Optional CR3 interception	ok
+	  Virtualize APIC access	ok
+	  RDTSCP			ok
+	 Unrestricted guest		ok
+	 INVPCID			missing (optional)
+	 XSAVES			ok
+	  EPT				ok
+	    4-level page walk		ok
+	    EPTP write-back		ok
+	    2M pages			ok
+	    1G pages			missing (optional)
+	    INVEPT			ok
+	      Single or all-context	ok
+	  VM-exit save IA32_PAT		ok
+	  VM-exit load IA32_PAT		ok
+	  VM-exit save IA32_EFER	ok
+	  VM-exit load IA32_EFER	ok
+	  VM-entry load IA32_PAT	ok
+	  VM-entry load IA32_EFER	ok
+	  Activity state HLT		ok
+
+	VT-d (IOMMU #0)			ok
+	  39-bit AGAW			ok
+	  48-bit AGAW			missing (optional)
+	  2M pages			ok
+	  1G pages			ok
+	  Queued invalidation		ok
+	  Interrupt remapping		ok
+	  Extended interrupt mode	ok
+
+	Check passed!
 </a>
-		    $ jailhouse enable /usr/share/jailhouse/cells/qemu-agl.cell</br>
+		    $ jailhouse enable /usr/share/jailhouse/cells/qemu-agl.cell
 
 		</p>
 
-	</section>
+
     <img src="pics/enable.png"></img>
-    </br>
+
     <img src="porting/enable.png"></png>
-    
+
 		<p>
 
-		    $ jailhouse cell create /usr/share/jailhouse/cells/agl-apic-demo.cell</br>
-		
+		    $ jailhouse cell create /usr/share/jailhouse/cells/agl-apic-demo.cell
+
 
 		</p>
 
-	</section>
+
 	<img src="pics/create.png"></img>
-    </br>
+
 	<img src="porting/create.png"></img>
 
 
 
 		<p>
 
-		
-		    $ jailhouse cell load apic-demo /usr/share/jailhouse/inmate/apic-demo.bin</br>
+
+		    $ jailhouse cell load apic-demo /usr/share/jailhouse/inmate/apic-demo.bin
 
 		</p>
 
@@ -535,21 +424,21 @@ Common targets are:</br>
 
 		<p>
 
-		    $ jailhouse cell start apic-demo</br>
-		    $ jailhouse cell stats apic-demo</br>
+		    $ jailhouse cell start apic-demo
+		    $ jailhouse cell stats apic-demo
 
 		</p>
 
 
 	<img src="pics/start.png"></img>
-    </br>
+
 	<img src="porting/start.png"></img>
 
 
 
 		<p>
-		    $ jailhouse cell shutdown apic-demo</br>
-		    $ jailhouse cell destroy apic-demo</br>
+		    $ jailhouse cell shutdown apic-demo
+		    $ jailhouse cell destroy apic-demo
 		</p>
 
 
