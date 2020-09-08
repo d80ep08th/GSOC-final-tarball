@@ -33,8 +33,9 @@ Where you want to build the AGL OS
 
 
 
-	You can click here to get a more verbose guide to cloning AGL:
-	<a href="https://wiki.automotivelinux.org/agl-distro/source-code">SOURCE CODE</a>
+You can click here to get a more verbose guide to cloning AGL:
+SOURCE CODE
+https://wiki.automotivelinux.org/agl-distro/source-code
 
 
 
@@ -46,20 +47,20 @@ Where you want to build the AGL OS
 
 
 
-	   Create the Build Directory
+Create the Build Directory
 
-	To build the QEMU version of the AGL OS with the Jailhouse hypervisor
-
-
-	Run the following command, it will build a directory where all the work specific to that
-	build will be stored.
+To build the QEMU version of the AGL OS with the Jailhouse hypervisor
 
 
+Run the following command, it will build a directory where all the work specific to that
+build will be stored.
 
 
-	<section id="content" class="two-column with-right-sidebar" >
 
-		<p>
+
+
+
+
 
 		$ source /meta-agl/scripts/aglsetup.sh -m qemux86-64 -b build-dir-name agl-demo agl-devel agl-jailhouse
 
@@ -75,7 +76,7 @@ Where you want to build the AGL OS
 		####    ├── setup.log
 		####    └── templateconf.cfg
 
-		</p>
+
 	The following are features and why they are used:  
 	agl-demo: enable layer meta-agl-demo and meta-qt5 - required to build agl-demo-platform  
 	agl-devel: activate development options (empty root password, debugger, strace, valgrind …)
@@ -88,9 +89,9 @@ Where you want to build the AGL OS
 	source this script to be able to start bit-baking(or in fancy words, to initialize the build environment)
 
 
-		<p>
 
-		$ source agl-init-build-dev
+
+$ source agl-init-build-dev
 
 
 Common targets are:
@@ -138,7 +139,6 @@ Common targets are:
     * agl-demo-platform             (* default IVI demo target *)
     * agl-demo-platform-crosssdk       (sdk for ^^)
 
-		</p>
 
 
     <img> shows the output given by agl-init-build-dev </img>
@@ -165,7 +165,7 @@ Common targets are:
 
 
 
-		<p>
+
 
 
 			$ bitbake agl-image-minimal
@@ -179,7 +179,7 @@ Common targets are:
 			##To get kernel source tree, you have to build kernel once
 			##$ bitbake virtual/kernel
 
-		</p>
+
 
 	      To know more about bitbake and what it can do, click here:
 	      <a href="https://www.yoctoproject.org/docs/1.6/bitbake-user-manual/bitbake-user-manual.html">BITBAKE</a>
@@ -190,7 +190,7 @@ Common targets are:
 
 
 
-		    Qemu x86-64
+Qemu x86-64
 
 
 
