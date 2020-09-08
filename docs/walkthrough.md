@@ -214,7 +214,7 @@ Connecting to the qemu machine externally
 
 
 
-![](Blog-Port-Jailhouse-to-AGL/porting/login.png"></img>
+![](Blog-Port-Jailhouse-to-AGL/porting/login.png)
 
 
 
@@ -280,9 +280,9 @@ Connecting to the qemu machine externally
 
 
 
-![](Blog-Port-Jailhouse-to-AGL/pics/enable.png"></img>
+![](Blog-Port-Jailhouse-to-AGL/pics/enable.png)
 
-![](Blog-Port-Jailhouse-to-AGL/porting/enable.png"></png>
+![](Blog-Port-Jailhouse-to-AGL/porting/enable.png)
 
 
 
@@ -292,9 +292,9 @@ Connecting to the qemu machine externally
 
 
 
-![](Blog-Port-Jailhouse-to-AGL/pics/create.png"></img>
+![](Blog-Port-Jailhouse-to-AGL/pics/create.png)
 
-![](Blog-Port-Jailhouse-to-AGL/porting/create.png"></img>
+![](Blog-Port-Jailhouse-to-AGL/porting/create.png)
 
 
 
@@ -306,9 +306,9 @@ Connecting to the qemu machine externally
 
 
 
-![](Blog-Port-Jailhouse-to-AGL/pics/load.png"></img>
+![](Blog-Port-Jailhouse-to-AGL/pics/load.png)
 
-![](Blog-Port-Jailhouse-to-AGL/porting/load.png"></img>
+![](Blog-Port-Jailhouse-to-AGL/porting/load.png)
 
 
 
@@ -320,9 +320,9 @@ Connecting to the qemu machine externally
 
 
 
-![](Blog-Port-Jailhouse-to-AGL/pics/start.png"></img>
+![](Blog-Port-Jailhouse-to-AGL/pics/start.png)
 
-![](Blog-Port-Jailhouse-to-AGL/porting/start.png"></img>
+![](Blog-Port-Jailhouse-to-AGL/porting/start.png)
 
 
 
@@ -332,6 +332,7 @@ Connecting to the qemu machine externally
 
 
 
-![](Blog-Port-Jailhouse-to-AGL/pics/shutdown.png"></img>
-![](Blog-Port-Jailhouse-to-AGL/porting/shutdown.png"></img>
-![](Blog-Port-Jailhouse-to-AGL/pics/destroy.png"></img><img src="porting/destroy.png"></img>
+![](Blog-Port-Jailhouse-to-AGL/pics/shutdown.png)
+![](Blog-Port-Jailhouse-to-AGL/porting/shutdown.png)
+![](Blog-Port-Jailhouse-to-AGL/pics/destroy.png)
+![](Blog-Port-Jailhouse-to-AGL/porting/destroy.png)
