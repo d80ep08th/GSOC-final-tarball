@@ -222,7 +222,7 @@ Connecting to the qemu machine externally
 
 
 
-	<!--- Inside Qemu -->
+## Inside Qemu
 
 
 
@@ -277,36 +277,35 @@ Connecting to the qemu machine externally
 	  Extended interrupt mode	ok
 
 	Check passed!
-</a>
-		    $ jailhouse enable /usr/share/jailhouse/cells/qemu-agl.cell
 
-		</p>
+	$ jailhouse enable /usr/share/jailhouse/cells/qemu-agl.cell
 
-
-    <img src="pics/enable.png"></img>
-
-    <img src="porting/enable.png"></png>
-
-		<p>
-
-		    $ jailhouse cell create /usr/share/jailhouse/cells/agl-apic-demo.cell
+	
 
 
-		</p>
+<img src="pics/enable.png"></img>
+
+<img src="porting/enable.png"></png>
+
+	
+
+	$ jailhouse cell create /usr/share/jailhouse/cells/agl-apic-demo.cell
 
 
-	<img src="pics/create.png"></img>
-
-	<img src="porting/create.png"></img>
+	
 
 
+<img src="pics/create.png"></img>
 
-		<p>
+<img src="porting/create.png"></img>
 
 
-		    $ jailhouse cell load apic-demo /usr/share/jailhouse/inmate/apic-demo.bin
 
-		</p>
+	
+
+
+	$ jailhouse cell load apic-demo /usr/share/jailhouse/inmate/apic-demo.bin
+
 
 
 
@@ -317,27 +316,25 @@ Connecting to the qemu machine externally
 
 
 
-		<p>
 
-		    $ jailhouse cell start apic-demo
-		    $ jailhouse cell stats apic-demo
-
-		</p>
-
-
-	<img src="pics/start.png"></img>
-
-	<img src="porting/start.png"></img>
+	$ jailhouse cell start apic-demo
+	$ jailhouse cell stats apic-demo
 
 
 
-		<p>
-		    $ jailhouse cell shutdown apic-demo
-		    $ jailhouse cell destroy apic-demo
-		</p>
+
+<img src="pics/start.png"></img>
+
+<img src="porting/start.png"></img>
 
 
-	<img src="pics/shutdown.png"></img>
-	<img src="porting/shutdown.png"></img>
-	<img src="pics/destroy.png"></img>
-	<img src="porting/destroy.png"></img>
+
+
+	$ jailhouse cell shutdown apic-demo
+	$ jailhouse cell destroy apic-demo
+
+
+
+<img src="pics/shutdown.png"></img>
+<img src="porting/shutdown.png"></img>
+<img src="pics/destroy.png"></img><img src="porting/destroy.png"></img>
