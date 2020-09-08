@@ -38,15 +38,6 @@ SOURCE CODE
 https://wiki.automotivelinux.org/agl-distro/source-code
 
 
-
-
-
-<!-- Inside Build Dir -->
-
-
-
-
-
 Create the Build Directory
 
 To build the QEMU version of the AGL OS with the Jailhouse hypervisor
@@ -54,13 +45,6 @@ To build the QEMU version of the AGL OS with the Jailhouse hypervisor
 
 Run the following command, it will build a directory where all the work specific to that
 build will be stored.
-
-
-
-
-
-
-
 
 		$ source /meta-agl/scripts/aglsetup.sh -m qemux86-64 -b build-dir-name agl-demo agl-devel agl-jailhouse
 
@@ -77,16 +61,13 @@ build will be stored.
 		####    └── templateconf.cfg
 
 
-	The following are features and why they are used:  
-	agl-demo: enable layer meta-agl-demo and meta-qt5 - required to build agl-demo-platform  
-	agl-devel: activate development options (empty root password, debugger, strace, valgrind …)
-	agl-jailhouse : enable layer meta-agl-jailhouse , required to build the out-of-kernel Jailhouse module  
+The following are features and why they are used:  
+agl-demo: enable layer meta-agl-demo and meta-qt5 - required to build agl-demo-platform  
+agl-devel: activate development options (empty root password, debugger, strace, valgrind …)
+agl-jailhouse : enable layer meta-agl-jailhouse , required to build the out-of-kernel Jailhouse module  
 
 
-
-
-
-	source this script to be able to start bit-baking(or in fancy words, to initialize the build environment)
+source this script to be able to start bit-baking(or in fancy words, to initialize the build environment)
 
 
 
