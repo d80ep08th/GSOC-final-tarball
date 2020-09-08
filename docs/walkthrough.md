@@ -2,7 +2,7 @@
 
 # Port Jailhouse to AGL
 
-# *italic*Walkthrough
+# *Walkthrough
 
 
 We use AGL as the main OS to install a hypervisor on an AGL reference platform.
@@ -34,7 +34,7 @@ Where you want to build the AGL OS
 
 
 You can click here to get a more verbose guide to cloning AGL:
-## *italic*SOURCE CODE
+## *SOURCE CODE
 https://wiki.automotivelinux.org/agl-distro/source-code
 
 
@@ -124,12 +124,12 @@ source this script to be able to start bit-baking(or in fancy words, to initiali
 	* agl-demo-platform-crosssdk       (sdk for ^^)
 
 
-<img> shows the output given by agl-init-build-dev </img>
 
 
 
 
-# *italic*Bitbake  
+
+# *Bitbake  
 
 
 ### NOTE : THIS MAY TAKE ALOT OF TIME(hours) TO BUILD
@@ -214,7 +214,7 @@ Connecting to the qemu machine externally
 
 
 
-	<img src="porting/login.png"></img>
+![](Blog-Port-Jailhouse-to-AGL/porting/login.png"></img>
 
 
 
@@ -277,12 +277,12 @@ Connecting to the qemu machine externally
 
 	$ jailhouse enable /usr/share/jailhouse/cells/qemu-agl.cell
 
-	
 
 
-<img src="pics/enable.png"></img>
 
-<img src="porting/enable.png"></png>
+![](Blog-Port-Jailhouse-to-AGL/pics/enable.png"></img>
+
+![](Blog-Port-Jailhouse-to-AGL/porting/enable.png"></png>
 
 
 
@@ -292,9 +292,9 @@ Connecting to the qemu machine externally
 
 
 
-<img src="pics/create.png"></img>
+![](Blog-Port-Jailhouse-to-AGL/pics/create.png"></img>
 
-<img src="porting/create.png"></img>
+![](Blog-Port-Jailhouse-to-AGL/porting/create.png"></img>
 
 
 
@@ -306,9 +306,9 @@ Connecting to the qemu machine externally
 
 
 
-<img src="pics/load.png"></img>
+![](Blog-Port-Jailhouse-to-AGL/pics/load.png"></img>
 
-<img src="porting/load.png"></img>
+![](Blog-Port-Jailhouse-to-AGL/porting/load.png"></img>
 
 
 
@@ -320,9 +320,9 @@ Connecting to the qemu machine externally
 
 
 
-<img src="pics/start.png"></img>
+![](Blog-Port-Jailhouse-to-AGL/pics/start.png"></img>
 
-<img src="porting/start.png"></img>
+![](Blog-Port-Jailhouse-to-AGL/porting/start.png"></img>
 
 
 
@@ -332,6 +332,6 @@ Connecting to the qemu machine externally
 
 
 
-<img src="pics/shutdown.png"></img>
-<img src="porting/shutdown.png"></img>
-<img src="pics/destroy.png"></img><img src="porting/destroy.png"></img>
+![](Blog-Port-Jailhouse-to-AGL/pics/shutdown.png"></img>
+![](Blog-Port-Jailhouse-to-AGL/porting/shutdown.png"></img>
+![](Blog-Port-Jailhouse-to-AGL/pics/destroy.png"></img><img src="porting/destroy.png"></img>
