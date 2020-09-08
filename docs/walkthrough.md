@@ -1,8 +1,8 @@
 
 
-###Port Jailhouse to AGL
+# Port Jailhouse to AGL
 
-*italic*Walkthrough
+# *italic*Walkthrough
 
 
 We use AGL as the main OS to install a hypervisor on an AGL reference platform.
@@ -26,15 +26,15 @@ Where you want to build the AGL OS
 
 
 
-		$ mkdir AGL
-		$ cd AGL
-		$ repo init -u https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo
-		$ repo sync
+	$ mkdir AGL
+	$ cd AGL
+	$ repo init -u https://gerrit.automotivelinux.org/gerrit/AGL/AGL-repo
+	$ repo sync
 
 
 
 You can click here to get a more verbose guide to cloning AGL:
-SOURCE CODE
+## SOURCE CODE
 https://wiki.automotivelinux.org/agl-distro/source-code
 
 
