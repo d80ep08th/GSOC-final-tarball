@@ -34,7 +34,7 @@ Where you want to build the AGL OS
 
 
 You can click here to get a more verbose guide to cloning AGL:
-## SOURCE CODE
+## *italic*SOURCE CODE
 https://wiki.automotivelinux.org/agl-distro/source-code
 
 
@@ -46,19 +46,19 @@ To build the QEMU version of the AGL OS with the Jailhouse hypervisor
 Run the following command, it will build a directory where all the work specific to that
 build will be stored.
 
-		$ source /meta-agl/scripts/aglsetup.sh -m qemux86-64 -b build-dir-name agl-demo agl-devel agl-jailhouse
+	$ source /meta-agl/scripts/aglsetup.sh -m qemux86-64 -b build-dir-name agl-demo agl-devel agl-jailhouse
 
-		##this will automotically change the directory to the build-dir-name/  
-		##structure of this direct-tree :)
-		##.
-		##├── agl-init-build-env
-		##├── aglsetup.manifest
-		##└── conf
-		####    ├── bblayers.conf
-		####    ├── fragments.log
-		####    ├── local.conf
-		####    ├── setup.log
-		####    └── templateconf.cfg
+	##this will automotically change the directory to the build-dir-name/  
+	##structure of this direct-tree :)
+	##.
+	##├── agl-init-build-env
+	##├── aglsetup.manifest
+	##└── conf
+	####    ├── bblayers.conf
+	####    ├── fragments.log
+	####    ├── local.conf
+	####    ├── setup.log
+	####    └── templateconf.cfg
 
 
 The following are features and why they are used:  
@@ -75,13 +75,13 @@ source this script to be able to start bit-baking(or in fancy words, to initiali
 
 
 
-    $ source agl-init-build-dev
+	$ source agl-init-build-dev
 
 
     Common targets are:
     - meta-agl layer:
     - included by default
-	* agl-image-boot                (just enough to boot)
+        * agl-image-boot                (just enough to boot)
 	* agl-image-minimal             (minimal filesystem with APIs)
 	* agl-image-minimal-crosssdk    (crosssdk for ^^)
 
@@ -124,20 +124,17 @@ source this script to be able to start bit-baking(or in fancy words, to initiali
 	* agl-demo-platform-crosssdk       (sdk for ^^)
 
 
-
-    <img> shows the output given by agl-init-build-dev </img>
-
+<img> shows the output given by agl-init-build-dev </img>
 
 
 
-Bitbake  
+
+# *italic*Bitbake  
 
 
-NOTE : THIS MAY TAKE ALOT OF TIME(hours) TO BUILD
-
-[ DEPENDING ON HOW POWERFUL YOUR MACHINE IS]
-
-[Even the most powerful machine will take atleast half an hr to get done with the build]
+### NOTE : THIS MAY TAKE ALOT OF TIME(hours) TO BUILD
+### DEPENDING ON HOW POWERFUL YOUR MACHINE IS
+### Even the most powerful machine will take atleast half an hr to get done with the build]
 
 You can manipulate this to some extent by properly assigning the variables  
 
@@ -159,9 +156,9 @@ You can delete this directory if something goes wrong and restart the build
 	##you can specifically build the jailhouse module (for changes you make to its layer)
 	##$ bitbake jailhouse
 
-			##You can also do the same for the kernel.
-			##To get kernel source tree, you have to build kernel once
-			##$ bitbake virtual/kernel
+	##You can also do the same for the kernel.
+	##To get kernel source tree, you have to build kernel once
+	##$ bitbake virtual/kernel
 
 
 
@@ -176,7 +173,7 @@ POKY DIRECTORY TREE
 
 
 
-Qemu x86-64
+# Qemu x86-64
 
 
 
@@ -184,11 +181,11 @@ Qemu x86-64
 
 
 
-			<!-- $bitbake -e | grep -i ^QB -->
-			##this will start the qemu machine based on the preconfigured QB(qemu-boot) variables
-			## Use the command--> $ bitbake -e | grep -i ^QB  ##to checkout the configuration
+	## $bitbake -e | grep -i ^QB 
+	##this will start the qemu machine based on the preconfigured QB(qemu-boot) variables
+	## Use the command--> $ bitbake -e | grep -i ^QB  ##to checkout the configuration
 
-			$ runqemu slirp kvm nographic
+	$ runqemu slirp kvm nographic
 
 
 
@@ -207,12 +204,12 @@ Connecting to the qemu machine externally
 
 
 
-		## Externally connect to the qemu machine by executing this command
-		## on another shell on the same machine  
+	## Externally connect to the qemu machine by executing this command
+	## on another shell on the same machine  
 
-		## This will help us view the progress of Jailhouse hypervisor in a more verbose manner
+	## This will help us view the progress of Jailhouse hypervisor in a more verbose manner
 
-		    $ nc localhost 4321
+	$ nc localhost 4321
 
 
 
@@ -230,7 +227,7 @@ Connecting to the qemu machine externally
 
 
 
-		    $ jailhouse hardware check  
+	$ jailhouse hardware check  
 
 	Feature				|Availability
 	------------------------------	------------------
@@ -287,12 +284,12 @@ Connecting to the qemu machine externally
 
 <img src="porting/enable.png"></png>
 
-	
+
 
 	$ jailhouse cell create /usr/share/jailhouse/cells/agl-apic-demo.cell
 
 
-	
+
 
 
 <img src="pics/create.png"></img>
@@ -301,7 +298,7 @@ Connecting to the qemu machine externally
 
 
 
-	
+
 
 
 	$ jailhouse cell load apic-demo /usr/share/jailhouse/inmate/apic-demo.bin
@@ -309,9 +306,9 @@ Connecting to the qemu machine externally
 
 
 
-	<img src="pics/load.png"></img>
+<img src="pics/load.png"></img>
 
-	<img src="porting/load.png"></img>
+<img src="porting/load.png"></img>
 
 
 
