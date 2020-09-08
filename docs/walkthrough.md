@@ -62,8 +62,11 @@ build will be stored.
 
 
 The following are features and why they are used:  
+
 agl-demo: enable layer meta-agl-demo and meta-qt5 - required to build agl-demo-platform  
+
 agl-devel: activate development options (empty root password, debugger, strace, valgrind …)
+
 agl-jailhouse : enable layer meta-agl-jailhouse , required to build the out-of-kernel Jailhouse module  
 
 
@@ -117,8 +120,8 @@ source this script to be able to start bit-baking(or in fancy words, to initiali
 	* agl-image-ivi                 (base for IVI targets)
 	* agl-image-ivi-crosssdk           (sdk for ^^)
 
-    * agl-demo-platform             (* default IVI demo target *)
-    * agl-demo-platform-crosssdk       (sdk for ^^)
+	* agl-demo-platform             (* default IVI demo target *)
+	* agl-demo-platform-crosssdk       (sdk for ^^)
 
 
 
@@ -127,34 +130,34 @@ source this script to be able to start bit-baking(or in fancy words, to initiali
 
 
 
-	    Bitbake  
+Bitbake  
 
 
-	NOTE : THIS MAY TAKE ALOT OF TIME(hours) TO BUILD
+NOTE : THIS MAY TAKE ALOT OF TIME(hours) TO BUILD
 
-	[ DEPENDING ON HOW POWERFUL YOUR MACHINE IS]
+[ DEPENDING ON HOW POWERFUL YOUR MACHINE IS]
 
-	[Even the most powerful machine will take atleast half an hr to get done with the build]
+[Even the most powerful machine will take atleast half an hr to get done with the build]
 
-	You can manipulate this to some extent by properly assigning the variables  
+You can manipulate this to some extent by properly assigning the variables  
 
-	DL_DIR & SSTATE_DIR in conf/local.conf in your build-directory.
+DL_DIR & SSTATE_DIR in conf/local.conf in your build-directory.
 
-	bitbake will by default create a tmp/ directory on the first build  
-	where all the work is stored  
-	You can delete this directory if something goes wrong and restart the build  
-
-
-
+bitbake will by default create a tmp/ directory on the first build  
+where all the work is stored  
+You can delete this directory if something goes wrong and restart the build  
 
 
 
-			$ bitbake agl-image-minimal
-			##the above command will build the OS , enough to be able to boot on qemux86-64
-			##this will build both the jailhouse module and the kernel but,
 
-			##you can specifically build the jailhouse module (for changes you make to its layer)
-			##$ bitbake jailhouse
+
+
+	$ bitbake agl-image-minimal
+	##the above command will build the OS , enough to be able to boot on qemux86-64
+	##this will build both the jailhouse module and the kernel but,
+
+	##you can specifically build the jailhouse module (for changes you make to its layer)
+	##$ bitbake jailhouse
 
 			##You can also do the same for the kernel.
 			##To get kernel source tree, you have to build kernel once
@@ -162,10 +165,12 @@ source this script to be able to start bit-baking(or in fancy words, to initiali
 
 
 
-	      To know more about bitbake and what it can do, click here:
-	      <a href="https://www.yoctoproject.org/docs/1.6/bitbake-user-manual/bitbake-user-manual.html">BITBAKE</a>
-		    To read more about the way directories are structured and their purpose , click here:
-		    <a href="http://git.yoctoproject.org/cgit.cgi/poky/plain/README.structure?h=blinky"> POKY DIRECTORY TREE </a>
+To know more about bitbake and what it can do, click here:
+BITBAKE
+https://www.yoctoproject.org/docs/1.6/bitbake-user-manual/bitbake-user-manual.html
+To read more about the way directories are structured and their purpose , click here:
+http://git.yoctoproject.org/cgit.cgi/poky/plain/README.structure?h=blinky 
+POKY DIRECTORY TREE 
 
 
 
@@ -178,38 +183,37 @@ Qemu x86-64
 
 
 
-		<p>
+
 			<!-- $bitbake -e | grep -i ^QB -->
 			##this will start the qemu machine based on the preconfigured QB(qemu-boot) variables
 			## Use the command--> $ bitbake -e | grep -i ^QB  ##to checkout the configuration
 
 			$ runqemu slirp kvm nographic
 
-		</p>
-
-
-		Enter the user login as: root
-
-		NOTE: bitbake -e : prints the environment dump that gets parsed even before the build starts
 
 
 
+Enter the user login as: root
 
-
-	<!-- Connecting to the qemu machine externally -->
+NOTE: bitbake -e : prints the environment dump that gets parsed even before the build starts
 
 
 
 
 
-		<p>
+Connecting to the qemu machine externally
+
+
+
+
+
 		## Externally connect to the qemu machine by executing this command
 		## on another shell on the same machine  
 
 		## This will help us view the progress of Jailhouse hypervisor in a more verbose manner
 
 		    $ nc localhost 4321
-		</p>
+
 
 
 
@@ -225,18 +229,17 @@ Qemu x86-64
 
 
 
-		<p>
+
 		    $ jailhouse hardware check  
 
-	Feature				Availability
+	Feature				|Availability
 	------------------------------	------------------
-	Number of CPUs > 1		ok
-	Long mode			ok
-	x2APIC				ok
-
-	  VT-x (VMX)			ok
-	  VMX outside SMX		ok
-	  VMX inside SMX		missing (optional)
+	Number of CPUs > 1		|ok
+	Long mode			|ok
+	x2APIC				|ok
+	  VT-x (VMX)			|ok
+	  VMX outside SMX		|ok
+	  VMX inside SMX		|missing (optional)
 	  IA32_TRUE_*_CLTS		ok
 	  NMI exiting			ok
 	  Preemption timer		ok
